@@ -71,11 +71,14 @@ public class Player : MonoBehaviour
     {
         isAlive = false;
 
+        // stop movement 
+        myRigidBody.velocity = new Vector2(0, 0);
+
         // play animation
         ChangeAnimationState(Enum.PlayerAnimation.Dying);
         float destroyDelay = myAnimator.GetCurrentAnimatorStateInfo(0).length;
 
-        Destroy(gameObject, destroyDelay);
+        FindObjectOfType<GameSession>().ProcessPlayerDeath();
     }
     #endregion
 
@@ -142,7 +145,6 @@ public class Player : MonoBehaviour
         // update bool
         isObject = false;
     }
-
 
     void SwallowObject(GameObject itemObject)
     {
