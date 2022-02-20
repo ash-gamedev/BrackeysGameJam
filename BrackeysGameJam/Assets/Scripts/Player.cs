@@ -66,6 +66,12 @@ public class Player : MonoBehaviour
     {
         return isObject;
     }
+
+    public void Die()
+    {
+        isAlive = false;
+        Destroy(gameObject);
+    }
     #endregion
 
     #region private functions
@@ -132,6 +138,7 @@ public class Player : MonoBehaviour
         isObject = false;
     }
 
+
     void SwallowObject(GameObject itemObject)
     {
         Item item = itemObject.GetComponent<Item>();
@@ -169,9 +176,6 @@ public class Player : MonoBehaviour
         else
             state = Enum.PlayerAnimation.Idling;
 
-        if (isJumping)
-            Debug.Log(playerVelocity);
-
         ChangeAnimationState(state);
     }
 
@@ -179,8 +183,6 @@ public class Player : MonoBehaviour
     {
         //stop the same animation from interuptting itself
         if (playerAnimationState == newState) return;
-
-        //Debug.Log(newState.ToString() + " - " + myRigidBody.velocity);
 
         //play the animation
         myAnimator.Play(newState.ToString());
@@ -265,6 +267,23 @@ public class Player : MonoBehaviour
             if(closestItem != null)
             {
                 SwallowObject(closestItem);
+            }
+        }
+    }
+    #endregion
+
+    #region Collisions
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag(Enum.Tags.Enemy.ToString()))
+        {
+            if (isDashing)
+            {
+                Destroy(collision.gameObject);
+            }
+            else
+            {
+                Die();
             }
         }
     }

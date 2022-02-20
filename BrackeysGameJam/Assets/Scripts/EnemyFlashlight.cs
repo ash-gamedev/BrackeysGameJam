@@ -7,19 +7,18 @@ namespace Assets.Scripts
     {
         private void OnTriggerEnter2D(Collider2D collision)
         {
+            Debug.Log("Enemy Trigger");
             if (collision.CompareTag("Player"))
             {
-                bool? isPlayerAnObject = collision.GetComponent<Player>()?.GetIsPlayerAnObject();
-                if(isPlayerAnObject == false)
+                Debug.Log("Is Player");
+                Player player = collision.GetComponent<Player>();
+                bool? isPlayerAnObject = player?.GetIsPlayerAnObject();
+                if(player != null && isPlayerAnObject == false)
                 {
-                    KillPlayer(collision.gameObject);
+                    Debug.Log("Kill player");
+                    player.Die();
                 }
             }
-        }
-
-        void KillPlayer(GameObject player)
-        {
-            Destroy(player);
         }
     }
 }
