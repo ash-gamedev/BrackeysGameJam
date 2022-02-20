@@ -145,7 +145,6 @@ public class Player : MonoBehaviour
             // if not an object, and an object has been swallowed, change into an object
             if (!isObject && canChange)
             {
-                Debug.Log("Changing");
                 ChangeIntoObject();
             }
             // otherwise, change back to normal form
@@ -161,11 +160,11 @@ public class Player : MonoBehaviour
         if (!isAlive || isObject) return;
         if (value.isPressed)
         {
-            Debug.Log("Swallowing");
             var itemsToSwallow = Physics2D.OverlapCircleAll(transform.position, swallowRange);
 
             float minItemDistance = float.MaxValue;
             GameObject closestItem = null;
+
             //find the closest item to player
             foreach (var item in itemsToSwallow)
             {
