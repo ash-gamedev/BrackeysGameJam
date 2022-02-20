@@ -283,7 +283,8 @@ public class Player : MonoBehaviour
             }
             else
             {
-                Die();
+                if(!isObject)
+                    Die();
             }
         }
     }
