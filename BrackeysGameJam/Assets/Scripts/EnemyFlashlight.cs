@@ -6,15 +6,17 @@ namespace Assets.Scripts
     public class EnemyFlashlight : MonoBehaviour
     {
         [SerializeField] GameObject enemyArrow;
+        bool killPlayer = false;
 
-        private void OnTriggerEnter2D(Collider2D collision)
+        private void OnTriggerStay2D(Collider2D collision)
         {
             if (collision.CompareTag("Player"))
             {
                 Player player = collision.GetComponent<Player>();
                 bool? isPlayerAnObject = player?.GetIsPlayerAnObject();
-                if(player != null && isPlayerAnObject == false)
+                if(player != null && isPlayerAnObject == false && killPlayer == false)
                 {
+                    killPlayer = true;
                     ShootPlayer();
                 }
             }
