@@ -18,6 +18,14 @@ public class Player : MonoBehaviour
     RaycastHit2D WallCheckHit;
     float jumpTime;
 
+    //items
+    [Header("Change/Swallow")]
+    [SerializeField] GameObject swallowedObject;
+    [SerializeField] float swallowRange = 1f;
+    SpriteRenderer playerSpriteRenderer;
+    SpriteRenderer objectSpriteRenderer;
+    bool canChange = false;
+
     [Header("For testing:")]
     [SerializeField] bool isObject = false;
 
@@ -31,6 +39,8 @@ public class Player : MonoBehaviour
     {
         myRigidBody = GetComponent<Rigidbody2D>();
         myBodyCollider = GetComponent<CircleCollider2D>();
+        playerSpriteRenderer = GetComponent<SpriteRenderer>();
+        objectSpriteRenderer = swallowedObject.GetComponent<SpriteRenderer>();
     }
 
     void Update()
@@ -51,6 +61,7 @@ public class Player : MonoBehaviour
     #region private functions
     void Move()
     {
+        if (isObject) return;
         Vector2 playerVelocity = new Vector2(moveInput.x * moveSpeed, myRigidBody.velocity.y);
         myRigidBody.velocity = playerVelocity;
     }
@@ -65,6 +76,40 @@ public class Player : MonoBehaviour
         }
     }
 
+    void ChangeIntoObject()
+    {
+        // stop movement 
+        myRigidBody.velocity = new Vector2(0, 0);
+
+        // hide spriterenderer on player
+        playerSpriteRenderer.enabled = false;
+
+        // show swallowed object sprite
+        objectSpriteRenderer.enabled = true;
+
+        // update bool
+        isObject = true;
+    }
+
+    void ChangeIntoPlayer()
+    {
+        // show spriterenderer on player
+        playerSpriteRenderer.enabled = true;
+
+        // hide swallowed object sprite
+        objectSpriteRenderer.enabled = false;
+
+        // update bool
+        isObject = false;
+    }
+
+    void SwallowObject(Sprite newSprite)
+    {
+        objectSpriteRenderer.sprite = newSprite;
+
+        canChange = true;
+    }
+
     #region input functions
     void OnMove(InputValue value)
     {
@@ -74,7 +119,7 @@ public class Player : MonoBehaviour
 
     void OnJump(InputValue value)
     {
-        if (!isAlive) return;
+        if (!isAlive || isObject) return;
         if (value.isPressed)
         {
             bool isTouchingGround = myBodyCollider.IsTouchingLayers(LayerMask.GetMask("Platform"));
@@ -83,6 +128,52 @@ public class Player : MonoBehaviour
             if (isTouchingGround || isWallSliding)
             {
                 myRigidBody.velocity += new Vector2(0f, jumpSpeed);
+            }
+        }
+    }
+    
+    void OnChangeIntoObject(InputValue value)
+    {
+        if (!isAlive) return;
+        if (value.isPressed)
+        {
+            // if not an object, and an object has been swallowed, change into an object
+            if (!isObject && canChange)
+            {
+                Debug.Log("Changing");
+                ChangeIntoObject();
+            }
+            // otherwise, change back to normal form
+            else
+            {
+                ChangeIntoPlayer();
+            }
+        }
+    }
+    
+    void OnSwallowObject(InputValue value)
+    {
+        if (!isAlive || isObject) return;
+        if (value.isPressed)
+        {
+            Debug.Log("Swallowing");
+            var itemsToSwallow = Physics2D.OverlapCircleAll(transform.position, swallowRange);
+
+            float minDistance = float.MaxValue;
+
+            //find the closest item to player
+            foreach (var item in itemsToSwallow)
+            {
+                if (item.CompareTag(Enum.Tags.Item.ToString()))
+                {
+                    float distanceToPlayer = Vector2.Distance(transform.position, item.transform.position);
+                    if (distanceToPlayer < minDistance)
+                    {
+                        minDistance = distanceToPlayer;
+                        SwallowObject(item.GetComponent<SpriteRenderer>()?.sprite);
+                        Debug.Log("Swallowed: " + item.gameObject.name);
+                    }
+                }
             }
         }
     }

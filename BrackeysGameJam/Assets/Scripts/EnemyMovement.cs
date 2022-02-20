@@ -37,8 +37,11 @@ namespace Assets.Scripts
         // when enemy reaches a wall (beyond collision boundaries)
         void OnTriggerExit2D(Collider2D collision)
         {
-            FlipSprite();
-            ChangeWalkTarget();
+            if (collision.CompareTag(Enum.Tags.Platform.ToString()))
+            {
+                FlipSprite();
+                ChangeWalkTarget();
+            }
         }
 
         private void ChangeWalkTarget()
