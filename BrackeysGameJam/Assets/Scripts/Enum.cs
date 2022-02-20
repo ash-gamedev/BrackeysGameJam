@@ -16,6 +16,7 @@ public class Enum : MonoBehaviour
         Idling,
         Moving,
         Jumping,
-        Falling
+        Falling,
+        Dashing
     }
 }

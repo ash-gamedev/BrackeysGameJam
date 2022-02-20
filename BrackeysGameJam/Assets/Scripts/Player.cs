@@ -14,7 +14,7 @@ public class Player : MonoBehaviour
     [SerializeField] float dashSpeed = 1f;
     [SerializeField] float startDashTime = 1f;
     float dashTime;
-    bool isDashing;
+    bool isDashing = false;
 
     [Header("Wall Jump")]
     //[SerializeField] float wallJumpTime = 0.2f;
@@ -153,14 +153,24 @@ public class Player : MonoBehaviour
 
         Vector2 playerVelocity = myRigidBody.velocity;
 
-        bool isMoving = Mathf.Abs(playerVelocity.x) > Mathf.Epsilon;
-        bool isJumping = Mathf.Abs(playerVelocity.y) > Mathf.Epsilon && playerVelocity.y > 0;
-        bool isFalling = Mathf.Abs(playerVelocity.y) > Mathf.Epsilon && playerVelocity.y <= 0 && !isWallSliding;
+        bool isTouchingGround = myBodyCollider.IsTouchingLayers(LayerMask.GetMask("Platform"));
+        bool isMoving = isTouchingGround && Mathf.Abs(playerVelocity.x) > Mathf.Epsilon;
+        bool isJumping = !isTouchingGround && Mathf.Abs(playerVelocity.y) > Mathf.Epsilon && playerVelocity.y > 0;
+        bool isFalling = !isTouchingGround && Mathf.Abs(playerVelocity.y) > Mathf.Epsilon && playerVelocity.y <= 0 && !isWallSliding;
 
-        if (isMoving)
+        if (isDashing)
+            state = Enum.PlayerAnimation.Dashing;
+        else if (isJumping)
+            state = Enum.PlayerAnimation.Jumping;
+        else if (isFalling)
+            state = Enum.PlayerAnimation.Falling;
+        else if (isMoving)
             state = Enum.PlayerAnimation.Moving;
         else
             state = Enum.PlayerAnimation.Idling;
+
+        if (isJumping)
+            Debug.Log(playerVelocity);
 
         ChangeAnimationState(state);
     }
@@ -170,7 +180,7 @@ public class Player : MonoBehaviour
         //stop the same animation from interuptting itself
         if (playerAnimationState == newState) return;
 
-        Debug.Log(newState.ToString());
+        //Debug.Log(newState.ToString() + " - " + myRigidBody.velocity);
 
         //play the animation
         myAnimator.Play(newState.ToString());
@@ -203,8 +213,11 @@ public class Player : MonoBehaviour
     
     void OnDash(InputValue value)
     {
-        dashTime = startDashTime;
-        isDashing = true;
+        if(moveInput.x != 0 && !isDashing)
+        {
+            dashTime = startDashTime;
+            isDashing = true;
+        }
     }
 
     void OnChangeIntoObject(InputValue value)
