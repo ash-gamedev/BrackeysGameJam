@@ -18,11 +18,14 @@ public class Player : MonoBehaviour
     RaycastHit2D WallCheckHit;
     float jumpTime;
 
+    [Header("For testing:")]
+    [SerializeField] bool isObject = false;
+
     Rigidbody2D myRigidBody;
     CircleCollider2D myBodyCollider;
 
     bool isAlive = true;
-
+    
     #region Start, Update, Awake
     void Start()
     {
@@ -35,6 +38,13 @@ public class Player : MonoBehaviour
         if (!isAlive) return;
         Move();
         FlipSprite();
+    }
+    #endregion
+
+    #region public functions
+    public bool GetIsPlayerAnObject()
+    {
+        return isObject;
     }
     #endregion
 
