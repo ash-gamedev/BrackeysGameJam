@@ -10,4 +10,12 @@ public class Enum : MonoBehaviour
         Item,
         Platform
     }
+
+    public enum PlayerAnimation
+    {
+        Idling,
+        Moving,
+        Jumping,
+        Falling
+    }
 }

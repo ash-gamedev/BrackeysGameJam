@@ -34,9 +34,11 @@ public class Player : MonoBehaviour
 
     [Header("For testing:")]
     [SerializeField] bool isObject = false;
-
+    
     Rigidbody2D myRigidBody;
     CircleCollider2D myBodyCollider;
+    Animator myAnimator;
+    Enum.PlayerAnimation playerAnimationState;
 
     bool isAlive = true;
     
@@ -46,6 +48,7 @@ public class Player : MonoBehaviour
         myRigidBody = GetComponent<Rigidbody2D>();
         myBodyCollider = GetComponent<CircleCollider2D>();
         playerSpriteRenderer = GetComponent<SpriteRenderer>();
+        myAnimator = GetComponent<Animator>();
     }
 
     void Update()
@@ -54,6 +57,7 @@ public class Player : MonoBehaviour
         Move();
         Dash();
         FlipSprite();
+        SetAnimation();
     }
     #endregion
 
@@ -141,7 +145,40 @@ public class Player : MonoBehaviour
 
         canChange = true;
     }
+    void SetAnimation()
+    {
+        //if (isObject) return; 
 
+        Enum.PlayerAnimation state;
+
+        Vector2 playerVelocity = myRigidBody.velocity;
+
+        bool isMoving = Mathf.Abs(playerVelocity.x) > Mathf.Epsilon;
+        bool isJumping = Mathf.Abs(playerVelocity.y) > Mathf.Epsilon && playerVelocity.y > 0;
+        bool isFalling = Mathf.Abs(playerVelocity.y) > Mathf.Epsilon && playerVelocity.y <= 0 && !isWallSliding;
+
+        if (isMoving)
+            state = Enum.PlayerAnimation.Moving;
+        else
+            state = Enum.PlayerAnimation.Idling;
+
+        ChangeAnimationState(state);
+    }
+
+    void ChangeAnimationState(Enum.PlayerAnimation newState)
+    {
+        //stop the same animation from interuptting itself
+        if (playerAnimationState == newState) return;
+
+        Debug.Log(newState.ToString());
+
+        //play the animation
+        myAnimator.Play(newState.ToString());
+
+        //reassign current state
+        playerAnimationState = newState;
+    }
+    
     #region input functions
     void OnMove(InputValue value)
     {
