@@ -17,6 +17,7 @@ public class Enum : MonoBehaviour
         Moving,
         Jumping,
         Falling,
-        Dashing
+        Dashing,
+        Dying
     }
 }

@@ -70,7 +70,12 @@ public class Player : MonoBehaviour
     public void Die()
     {
         isAlive = false;
-        Destroy(gameObject);
+
+        // play animation
+        ChangeAnimationState(Enum.PlayerAnimation.Dying);
+        float destroyDelay = myAnimator.GetCurrentAnimatorStateInfo(0).length;
+
+        Destroy(gameObject, destroyDelay);
     }
     #endregion
 
