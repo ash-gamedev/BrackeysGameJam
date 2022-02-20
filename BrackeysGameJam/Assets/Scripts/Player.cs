@@ -10,10 +10,16 @@ public class Player : MonoBehaviour
     [SerializeField] int jumpSpeed = 5;
     Vector2 moveInput;
 
+    [Header("Dash")]
+    [SerializeField] float dashSpeed = 1f;
+    [SerializeField] float startDashTime = 1f;
+    float dashTime;
+    bool isDashing;
+
     [Header("Wall Jump")]
-    [SerializeField] float wallJumpTime = 0.2f;
-    [SerializeField] float wallSlideSpeed = 0.001f;
-    [SerializeField] float wallDistance = 0.5f;
+    //[SerializeField] float wallJumpTime = 0.2f;
+    //[SerializeField] float wallSlideSpeed = 0.001f;
+    //[SerializeField] float wallDistance = 0.5f;
     [SerializeField] bool isWallSliding = false;
     RaycastHit2D WallCheckHit;
     float jumpTime;
@@ -46,6 +52,7 @@ public class Player : MonoBehaviour
     {
         if (!isAlive) return;
         Move();
+        Dash();
         FlipSprite();
     }
     #endregion
@@ -60,9 +67,25 @@ public class Player : MonoBehaviour
     #region private functions
     void Move()
     {
-        if (isObject) return;
+        if (isObject || isDashing) return;
         Vector2 playerVelocity = new Vector2(moveInput.x * moveSpeed, myRigidBody.velocity.y);
         myRigidBody.velocity = playerVelocity;
+    }
+
+    void Dash()
+    {
+        if (isObject || !isDashing) return;
+        if(dashTime <= 0)
+        {
+            isDashing = false;
+            dashTime = startDashTime;
+        }
+        else
+        {
+            dashTime -= Time.deltaTime;
+
+            myRigidBody.velocity = new Vector2(moveInput.x * dashSpeed, myRigidBody.velocity.y);
+        }
     }
 
     void FlipSprite()
@@ -141,6 +164,12 @@ public class Player : MonoBehaviour
         }
     }
     
+    void OnDash(InputValue value)
+    {
+        dashTime = startDashTime;
+        isDashing = true;
+    }
+
     void OnChangeIntoObject(InputValue value)
     {
         if (!isAlive) return;
