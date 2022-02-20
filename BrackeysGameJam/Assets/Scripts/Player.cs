@@ -20,10 +20,10 @@ public class Player : MonoBehaviour
 
     //items
     [Header("Change/Swallow")]
-    [SerializeField] GameObject swallowedObject;
     [SerializeField] float swallowRange = 1f;
+    GameObject swallowedObject;
+    GameObject swallowedObjectInstance;
     SpriteRenderer playerSpriteRenderer;
-    SpriteRenderer objectSpriteRenderer;
     bool canChange = false;
 
     [Header("For testing:")]
@@ -40,7 +40,6 @@ public class Player : MonoBehaviour
         myRigidBody = GetComponent<Rigidbody2D>();
         myBodyCollider = GetComponent<CircleCollider2D>();
         playerSpriteRenderer = GetComponent<SpriteRenderer>();
-        objectSpriteRenderer = swallowedObject.GetComponent<SpriteRenderer>();
     }
 
     void Update()
@@ -84,8 +83,11 @@ public class Player : MonoBehaviour
         // hide spriterenderer on player
         playerSpriteRenderer.enabled = false;
 
-        // show swallowed object sprite
-        objectSpriteRenderer.enabled = true;
+        // move object to player position show swallowed object sprite
+        swallowedObjectInstance = Instantiate(swallowedObject,  // what object to instantiate
+                        transform.position, // where to spawn the object
+                        Quaternion.identity, // need to specify rotation
+                        transform); // this will place the enemies under the Player as an child
 
         // update bool
         isObject = true;
@@ -97,20 +99,22 @@ public class Player : MonoBehaviour
         playerSpriteRenderer.enabled = true;
 
         // hide swallowed object sprite
-        objectSpriteRenderer.enabled = false;
+        Destroy(swallowedObjectInstance);
 
         // update bool
         isObject = false;
     }
 
-    void SwallowObject(GameObject item)
+    void SwallowObject(GameObject itemObject)
     {
-        Sprite sprite = item.GetComponent<SpriteRenderer>().sprite;
+        Item item = itemObject.GetComponent<Item>();
 
-        if (sprite != null)
-            objectSpriteRenderer.sprite = sprite;
+        if (itemObject != null)
+        {
+            swallowedObject = item.GetSlimeObject();
+        }
 
-        Destroy(item);
+        Destroy(itemObject);
 
         canChange = true;
     }
