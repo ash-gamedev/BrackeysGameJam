@@ -103,9 +103,14 @@ public class Player : MonoBehaviour
         isObject = false;
     }
 
-    void SwallowObject(Sprite newSprite)
+    void SwallowObject(GameObject item)
     {
-        objectSpriteRenderer.sprite = newSprite;
+        Sprite sprite = item.GetComponent<SpriteRenderer>().sprite;
+
+        if (sprite != null)
+            objectSpriteRenderer.sprite = sprite;
+
+        Destroy(item);
 
         canChange = true;
     }
@@ -159,21 +164,25 @@ public class Player : MonoBehaviour
             Debug.Log("Swallowing");
             var itemsToSwallow = Physics2D.OverlapCircleAll(transform.position, swallowRange);
 
-            float minDistance = float.MaxValue;
-
+            float minItemDistance = float.MaxValue;
+            GameObject closestItem = null;
             //find the closest item to player
             foreach (var item in itemsToSwallow)
             {
                 if (item.CompareTag(Enum.Tags.Item.ToString()))
                 {
                     float distanceToPlayer = Vector2.Distance(transform.position, item.transform.position);
-                    if (distanceToPlayer < minDistance)
+                    if (distanceToPlayer < minItemDistance)
                     {
-                        minDistance = distanceToPlayer;
-                        SwallowObject(item.GetComponent<SpriteRenderer>()?.sprite);
-                        Debug.Log("Swallowed: " + item.gameObject.name);
+                        minItemDistance = distanceToPlayer;
+                        closestItem = item.gameObject;
                     }
                 }
+            }
+
+            if(closestItem != null)
+            {
+                SwallowObject(closestItem);
             }
         }
     }
