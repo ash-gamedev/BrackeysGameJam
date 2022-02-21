@@ -9,7 +9,10 @@ namespace Assets.Scripts
         [SerializeField] float flashLightSightDistance;
         bool killPlayer = false;
 
-
+        public bool GetIsKillingPlayer() 
+        {
+            return killPlayer;
+        }
         private void OnTriggerStay2D(Collider2D collision)
         {
             if (collision.CompareTag("Player"))

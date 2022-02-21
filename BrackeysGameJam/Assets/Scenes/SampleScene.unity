@@ -13793,7 +13793,7 @@ Tilemap:
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.6862745}
   m_Origin: {x: -18, y: -14, z: 0}
   m_Size: {x: 45, y: 27, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
@@ -13855,7 +13855,7 @@ TilemapRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1043226596}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -23849,7 +23849,7 @@ Tilemap:
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
-  m_Color: {r: 1, g: 1, b: 1, a: 0.19607843}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_Origin: {x: -18, y: -14, z: 0}
   m_Size: {x: 45, y: 27, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
@@ -24172,13 +24172,21 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 837761739145758013, guid: b051c2c930493c5499b1c5074873e7f9, type: 3}
+      propertyPath: moveSpeed
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 837761739145758013, guid: b051c2c930493c5499b1c5074873e7f9, type: 3}
+      propertyPath: walkDistance
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 837761739145758014, guid: b051c2c930493c5499b1c5074873e7f9, type: 3}
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 837761739145758014, guid: b051c2c930493c5499b1c5074873e7f9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.47
+      value: 7.47
       objectReference: {fileID: 0}
     - target: {fileID: 837761739145758014, guid: b051c2c930493c5499b1c5074873e7f9, type: 3}
       propertyPath: m_LocalPosition.y

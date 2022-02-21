@@ -12,11 +12,13 @@ namespace Assets.Scripts
         int direction = -1;
 
         Rigidbody2D myRigidBody;
+        EnemyFlashlight flashlight;
 
         #region Start, Update
         void Start()
         {
             myRigidBody = GetComponent<Rigidbody2D>();
+            flashlight = gameObject.transform.Find("Flashlight").GetComponent<EnemyFlashlight>();
 
             // set the walk target
             ChangeWalkTarget();
@@ -24,6 +26,7 @@ namespace Assets.Scripts
 
         void Update()
         {
+            if (flashlight.GetIsKillingPlayer() == true) return;
             MoveTowards(walkTarget);
             float distanceToTarget = Vector2.Distance(transform.position, walkTarget);
             if (distanceToTarget <= 0.001f)
