@@ -21,4 +21,13 @@ public class Enum : MonoBehaviour
         Dying,
         Swallowing
     }
+
+    public enum SoundEffects
+    {
+        PlayerJump,
+        PlayerDash,
+        PlayerDeath,
+        EnemyProjectile
+    }
+
 }
