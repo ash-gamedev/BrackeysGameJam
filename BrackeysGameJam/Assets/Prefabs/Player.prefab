@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1530623498411874059}
   - component: {fileID: 1530623498411874058}
-  - component: {fileID: 1530623498411874057}
   - component: {fileID: 1530623498411874062}
+  - component: {fileID: 8919040426394415152}
   - component: {fileID: 1530623498411874061}
   - component: {fileID: 1530623498411874060}
   - component: {fileID: 1530623498411874063}
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1395263681
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: 826339747, guid: eda740129032df94cb6eeba0b9037657, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -89,22 +89,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!58 &1530623498411874057
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1530623498411874056}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.37754056}
-  serializedVersion: 2
-  m_Radius: 0.36957684
 --- !u!50 &1530623498411874062
 Rigidbody2D:
   serializedVersion: 4
@@ -121,11 +105,27 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 6dbc2c706e9bb2e48b65a51a9d4c593c, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!70 &8919040426394415152
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1530623498411874056}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 6200000, guid: 6dbc2c706e9bb2e48b65a51a9d4c593c, type: 2}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.01119419, y: -0.3357636}
+  m_Size: {x: 1.1194198, y: 0.82848835}
+  m_Direction: 1
 --- !u!114 &1530623498411874061
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 856443237d9992047ad59e5047b1b723, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 7
+  moveSpeed: 6
   jumpSpeed: 5
   dashSpeed: 40
   startDashTime: 0.1

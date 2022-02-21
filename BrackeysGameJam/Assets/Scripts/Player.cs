@@ -37,7 +37,7 @@ public class Player : MonoBehaviour
     [SerializeField] bool isObject = false;
     
     Rigidbody2D myRigidBody;
-    CircleCollider2D myBodyCollider;
+    CapsuleCollider2D myBodyCollider;
     Animator myAnimator;
     Enum.PlayerAnimation playerAnimationState;
 
@@ -47,7 +47,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         myRigidBody = GetComponent<Rigidbody2D>();
-        myBodyCollider = GetComponent<CircleCollider2D>();
+        myBodyCollider = GetComponent<CapsuleCollider2D>();
         playerSpriteRenderer = GetComponent<SpriteRenderer>();
         myAnimator = GetComponent<Animator>();
     }
@@ -103,7 +103,8 @@ public class Player : MonoBehaviour
         {
             dashTime -= Time.deltaTime;
 
-            myRigidBody.velocity = new Vector2(moveInput.x * dashSpeed, myRigidBody.velocity.y);
+            float direction = Mathf.Sign(transform.localScale.x);
+            myRigidBody.velocity = new Vector2(direction * dashSpeed, myRigidBody.velocity.y);
         }
     }
 
@@ -237,7 +238,7 @@ public class Player : MonoBehaviour
     
     void OnDash(InputValue value)
     {
-        if(moveInput.x != 0 && !isDashing)
+        if(!isDashing)
         {
             dashTime = startDashTime;
             isDashing = true;
