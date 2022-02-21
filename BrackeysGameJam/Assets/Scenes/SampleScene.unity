@@ -177,7 +177,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: bb420e4e5c359d34ab3f6ad0e62a7587, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -199,7 +199,7 @@ TilemapRenderer:
   m_SortingLayer: 1
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
-  m_ChunkCullingBounds: {x: 0.029411793, y: 0.029411793, z: 0}
+  m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
   m_SortOrder: 0
@@ -3730,7 +3730,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: bb420e4e5c359d34ab3f6ad0e62a7587, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3752,7 +3752,7 @@ TilemapRenderer:
   m_SortingLayer: 2
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
-  m_ChunkCullingBounds: {x: 0.029411793, y: 0.029411793, z: 0}
+  m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
   m_SortOrder: 0
@@ -13868,7 +13868,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: bb420e4e5c359d34ab3f6ad0e62a7587, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -24142,7 +24142,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 837761737857610316, guid: b051c2c930493c5499b1c5074873e7f9, type: 3}
       propertyPath: m_SortingLayer
-      value: 2
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 837761737857610316, guid: b051c2c930493c5499b1c5074873e7f9, type: 3}
       propertyPath: m_SortingLayerID
@@ -24150,15 +24150,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 837761737857610353, guid: b051c2c930493c5499b1c5074873e7f9, type: 3}
       propertyPath: m_SpriteTilingProperty.border.z
-      value: 0
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 837761737857610353, guid: b051c2c930493c5499b1c5074873e7f9, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 1.916
+      value: 1.6
       objectReference: {fileID: 0}
     - target: {fileID: 837761737857610353, guid: b051c2c930493c5499b1c5074873e7f9, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 1.538
+      value: 1.1
       objectReference: {fileID: 0}
     - target: {fileID: 837761737857610354, guid: b051c2c930493c5499b1c5074873e7f9, type: 3}
       propertyPath: enemyArrow

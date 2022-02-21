@@ -18,6 +18,7 @@ public class Enum : MonoBehaviour
         Jumping,
         Falling,
         Dashing,
-        Dying
+        Dying,
+        Swallowing
     }
 }

@@ -31,6 +31,7 @@ public class Player : MonoBehaviour
     GameObject swallowedObjectInstance;
     SpriteRenderer playerSpriteRenderer;
     bool canChange = false;
+    bool isSwallowing = false;
 
     [Header("For testing:")]
     [SerializeField] bool isObject = false;
@@ -155,10 +156,21 @@ public class Player : MonoBehaviour
             swallowedObject = item.GetSlimeObject();
         }
 
+        isSwallowing = true;
+        ChangeAnimationState(Enum.PlayerAnimation.Swallowing);
+        float delay = myAnimator.GetCurrentAnimatorStateInfo(0).length;
+        Invoke("SwallowComplete", delay);
+
         Destroy(itemObject);
 
         canChange = true;
     }
+    
+    void SwallowComplete()
+    {
+        isSwallowing = false;
+    }
+
     void SetAnimation()
     {
         //if (isObject) return; 
@@ -172,18 +184,21 @@ public class Player : MonoBehaviour
         bool isJumping = !isTouchingGround && Mathf.Abs(playerVelocity.y) > Mathf.Epsilon && playerVelocity.y > 0;
         bool isFalling = !isTouchingGround && Mathf.Abs(playerVelocity.y) > Mathf.Epsilon && playerVelocity.y <= 0 && !isWallSliding;
 
-        if (isDashing)
-            state = Enum.PlayerAnimation.Dashing;
-        else if (isJumping)
-            state = Enum.PlayerAnimation.Jumping;
-        else if (isFalling)
-            state = Enum.PlayerAnimation.Falling;
-        else if (isMoving)
-            state = Enum.PlayerAnimation.Moving;
-        else
-            state = Enum.PlayerAnimation.Idling;
+        if (!isSwallowing)
+        {
+            if (isDashing)
+                state = Enum.PlayerAnimation.Dashing;
+            else if (isJumping)
+                state = Enum.PlayerAnimation.Jumping;
+            else if (isFalling)
+                state = Enum.PlayerAnimation.Falling;
+            else if (isMoving)
+                state = Enum.PlayerAnimation.Moving;
+            else
+                state = Enum.PlayerAnimation.Idling;
 
-        ChangeAnimationState(state);
+            ChangeAnimationState(state);
+        }
     }
 
     void ChangeAnimationState(Enum.PlayerAnimation newState)
@@ -295,6 +310,8 @@ public class Player : MonoBehaviour
             }
         }
     }
+    
+    
     #endregion
 
     #endregion

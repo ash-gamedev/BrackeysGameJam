@@ -6,7 +6,9 @@ namespace Assets.Scripts
     public class EnemyFlashlight : MonoBehaviour
     {
         [SerializeField] GameObject enemyArrow;
+        [SerializeField] float flashLightSightDistance;
         bool killPlayer = false;
+
 
         private void OnTriggerStay2D(Collider2D collision)
         {
