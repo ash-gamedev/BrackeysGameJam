@@ -41,6 +41,9 @@ public class Player : MonoBehaviour
     Animator myAnimator;
     Enum.PlayerAnimation playerAnimationState;
 
+    //public object
+    AudioPlayer audioPlayer;
+
     bool isAlive = true;
     
     #region Start, Update, Awake
@@ -50,6 +53,7 @@ public class Player : MonoBehaviour
         myBodyCollider = GetComponent<CapsuleCollider2D>();
         playerSpriteRenderer = GetComponent<SpriteRenderer>();
         myAnimator = GetComponent<Animator>();
+        audioPlayer = FindObjectOfType<AudioPlayer>();
     }
 
     void Update()
@@ -78,6 +82,9 @@ public class Player : MonoBehaviour
         // play animation
         ChangeAnimationState(Enum.PlayerAnimation.Dying);
         float destroyDelay = myAnimator.GetCurrentAnimatorStateInfo(0).length;
+
+        //play audio 
+        audioPlayer.PlaySoundEffect(Enum.SoundEffects.PlayerDeath);
 
         FindObjectOfType<GameSession>().ProcessPlayerDeath();
     }
@@ -228,10 +235,13 @@ public class Player : MonoBehaviour
         {
             bool isTouchingGround = myBodyCollider.IsTouchingLayers(LayerMask.GetMask("Platform"));
 
-            // first jump while player is touching ground
+            // jump while player is touching ground
             if (isTouchingGround || isWallSliding)
             {
                 myRigidBody.velocity += new Vector2(0f, jumpSpeed);
+
+                //play audio 
+                audioPlayer.PlaySoundEffect(Enum.SoundEffects.PlayerJump);
             }
         }
     }
@@ -242,6 +252,9 @@ public class Player : MonoBehaviour
         {
             dashTime = startDashTime;
             isDashing = true;
+
+            //play audio 
+            audioPlayer.PlaySoundEffect(Enum.SoundEffects.PlayerDash);
         }
     }
 
