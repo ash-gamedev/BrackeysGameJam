@@ -51,6 +51,9 @@ TagManager:
   - name: Platform
     uniqueID: 1392744345
     locked: 0
+  - name: Mask
+    uniqueID: 3527646423
+    locked: 0
   - name: Enemy
     uniqueID: 2978718213
     locked: 0
@@ -59,4 +62,7 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 2899703615
+    locked: 0
+  - name: FlashLight
+    uniqueID: 2256187377
     locked: 0
