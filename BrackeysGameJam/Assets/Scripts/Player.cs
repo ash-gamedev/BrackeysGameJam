@@ -35,6 +35,9 @@ public class Player : MonoBehaviour
     bool canChange = false;
     bool isSwallowing = false;
 
+    [Header("Change/Swallow")]
+    [SerializeField] ParticleSystem EnemyDeathParticleEffect;
+
     [Header("For testing:")]
     [SerializeField] bool isObject = false;
 
@@ -133,6 +136,9 @@ public class Player : MonoBehaviour
 
         // stop movement 
         myRigidBody.velocity = new Vector2(0, 0);
+
+        // first make sure player sprite is enabled
+        ChangeIntoPlayer();
 
         // play animation
         ChangeAnimationState(Enum.PlayerAnimation.Dying);
@@ -374,14 +380,27 @@ public class Player : MonoBehaviour
     #region Collisions
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (collision.gameObject.CompareTag(Enum.Tags.Spikes.ToString()))
+        {
+            Debug.Log("Death by spikes");
+            Die();
+        }
+
         if (collision.gameObject.CompareTag(Enum.Tags.Enemy.ToString()))
         {
             if (isDashing)
             {
+                // Particles
+                ParticleSystem instance = Instantiate(EnemyDeathParticleEffect, collision.gameObject.transform.position, Quaternion.identity);
+                Destroy(instance.gameObject, instance.main.duration + instance.main.startLifetime.constantMax);
+
                 Destroy(collision.gameObject);
             }
             else
             {
+                Debug.Log("Death by collision with enemy");
+                Debug.Log(collision);
+                Debug.Log(isDashing);
                 if(!isObject)
                     Die();
             }

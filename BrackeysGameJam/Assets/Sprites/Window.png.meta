@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 239fd678510126b4caec25e71fb7ee6e
+guid: df2c9d3323f94454bbb2a5125afcc2e1
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -42,12 +42,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 10
+  spritePixelsToUnits: 12
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -114,91 +114,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites:
-    - serializedVersion: 2
-      name: Enemy_Moving_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 20
-        height: 20
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 920e0bcbd5cad66438bf00713878368a
-      internalID: -1658666836
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Enemy_Moving_1
-      rect:
-        serializedVersion: 2
-        x: 20
-        y: 0
-        width: 20
-        height: 20
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c2edc43f4070b904390e8372f01016e6
-      internalID: -1701804480
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Enemy_Moving_2
-      rect:
-        serializedVersion: 2
-        x: 40
-        y: 0
-        width: 20
-        height: 20
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 22d2cb92e21cbee4da4b7cd13a63a0da
-      internalID: -111577546
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Enemy_Moving_3
-      rect:
-        serializedVersion: 2
-        x: 60
-        y: 0
-        width: 20
-        height: 20
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 09e75544e64e19c43bdde2f22ab73425
-      internalID: 1728056499
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
+    sprites: []
     outline: []
     physicsShape: []
     bones: []
@@ -209,11 +125,7 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable:
-      Enemy_Moving_2: -111577546
-      Enemy_Moving_1: -1701804480
-      Enemy_Moving_3: 1728056499
-      Enemy_Moving_0: -1658666836
+    nameFileIdTable: {}
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

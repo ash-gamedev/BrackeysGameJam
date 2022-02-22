@@ -8,6 +8,8 @@ TagManager:
   - Platform
   - Enemy
   - Light
+  - KillPlayer
+  - Spikes
   layers:
   - Default
   - TransparentFX
@@ -48,6 +50,9 @@ TagManager:
   - name: Background
     uniqueID: 2913027149
     locked: 0
+  - name: Spikes
+    uniqueID: 488691405
+    locked: 0
   - name: Platform
     uniqueID: 1392744345
     locked: 0
@@ -56,6 +61,9 @@ TagManager:
     locked: 0
   - name: Enemy
     uniqueID: 2978718213
+    locked: 0
+  - name: Window
+    uniqueID: 736471163
     locked: 0
   - name: Item
     uniqueID: 2932074099

@@ -8,7 +8,8 @@ public class Enum : MonoBehaviour
         Player,
         Enemy,
         Item,
-        Platform
+        Platform,
+        Spikes
     }
 
     public enum PlayerAnimation
@@ -21,6 +22,14 @@ public class Enum : MonoBehaviour
         Dying,
         Swallowing,
         WallSliding
+    }
+
+    public enum EnemyAnimation
+    {
+        Idling,
+        Moving,
+        LightOn,
+        LightOff
     }
 
     public enum SoundEffects
