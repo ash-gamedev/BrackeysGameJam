@@ -22,6 +22,7 @@ public class Player : MonoBehaviour
     [SerializeField] float wallSlideSpeed = 0.001f;
     [SerializeField] float wallDistance = 0.5f;
     [SerializeField] bool isWallSliding = false;
+    [SerializeField] float wallJumpBoost = 2f;
     RaycastHit2D WallCheckHit;
     float jumpTime;
     bool collidedWithWall = false;
@@ -117,6 +118,7 @@ public class Player : MonoBehaviour
             // Grappling wall slide, slow wall speed
             if (isWallSliding)
             {
+                Debug.Log(myRigidBody.velocity);
                 myRigidBody.velocity = new Vector2(myRigidBody.velocity.x, Mathf.Clamp(myRigidBody.velocity.y, wallSlideSpeed, float.MaxValue));
             }
         }
@@ -303,7 +305,8 @@ public class Player : MonoBehaviour
             {
                 Debug.Log("Jump - collidedWithTall : " + collidedWithWall);
 
-                myRigidBody.velocity += new Vector2(0f, jumpSpeed);
+                float speed = jumpSpeed + (isWallSliding ? wallJumpBoost : 0);
+                myRigidBody.velocity += new Vector2(0f, speed);
 
                 //play audio 
                 audioPlayer.PlaySoundEffect(Enum.SoundEffects.PlayerJump);
