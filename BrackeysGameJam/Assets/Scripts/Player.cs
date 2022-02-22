@@ -302,12 +302,22 @@ public class Player : MonoBehaviour
     void OnMove(InputValue value)
     {
         if (!isAlive) return;
+
+        // if player is currently an object
+        if (isObject)
+        {
+            // only change into player if moving (x input not 0)
+            if(value.Get<Vector2>().x != 0f)
+                ChangeIntoPlayer();
+        }
+
         moveInput = value.Get<Vector2>();
     }
 
     void OnJump(InputValue value)
     {
-        if (!isAlive || isObject) return;
+        if (!isAlive) return;
+        if (isObject) ChangeIntoPlayer();
         if (value.isPressed)
         {
             isTouchingGround = myFeetCollider2D.IsTouchingLayers(LayerMask.GetMask(Enum.Tags.Platform.ToString()));
