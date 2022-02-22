@@ -84,7 +84,7 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!isAlive) return;
+        if (!isAlive || isObject) return;
         isFacingRight = moveInput.x > 0;
         isTouchingGround = myFeetCollider2D.IsTouchingLayers(groundLayer);
 
@@ -194,6 +194,8 @@ public class Player : MonoBehaviour
     {
         // stop movement 
         myRigidBody.velocity = new Vector2(0, 0);
+        isWallSliding = false;
+        isDashing = false;
 
         // hide spriterenderer on player
         playerSpriteRenderer.enabled = false;
