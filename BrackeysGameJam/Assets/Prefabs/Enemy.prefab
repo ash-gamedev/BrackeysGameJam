@@ -130,8 +130,10 @@ PolygonCollider2D:
     m_Paths:
     - - {x: 0.80244166, y: 0.07633985}
       - {x: 0.8047579, y: -0.4697372}
-      - {x: -0.96482193, y: -0.5056002}
-      - {x: -0.9659672, y: 0.5883071}
+      - {x: -0.7070821, y: -0.4353075}
+      - {x: -0.8920513, y: -0.15810916}
+      - {x: -0.86218095, y: 0.1621412}
+      - {x: -0.6894825, y: 0.45709398}
 --- !u!1 &837761739145758011
 GameObject:
   m_ObjectHideFlags: 0
@@ -298,8 +300,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 2.5
-  walkDistance: 4
-  idlePauseTime: 1
+  walkDistance: 3
+  idlePauseTime: 0.5
 --- !u!95 &1946934127
 Animator:
   serializedVersion: 4

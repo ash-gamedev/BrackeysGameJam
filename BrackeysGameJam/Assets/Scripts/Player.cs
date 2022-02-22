@@ -16,6 +16,7 @@ public class Player : MonoBehaviour
     [SerializeField] float startDashTime = 1f;
     float dashTime;
     bool isDashing = false;
+    string dashDirection;
 
     [Header("Wall Jump")]
     [SerializeField] float wallJumpTime = 0.2f;
@@ -25,7 +26,7 @@ public class Player : MonoBehaviour
     [SerializeField] float wallJumpBoost = 2f;
     RaycastHit2D WallCheckHit;
     float jumpTime;
-    bool collidedWithWall = false;
+    bool _canWallJump = false;
 
     //items
     [Header("Change/Swallow")]
@@ -36,7 +37,7 @@ public class Player : MonoBehaviour
     bool canChange = false;
     bool isSwallowing = false;
 
-    [Header("Change/Swallow")]
+    [Header("Enemy")]
     [SerializeField] ParticleSystem EnemyDeathParticleEffect;
 
     [Header("For testing:")]
@@ -86,41 +87,40 @@ public class Player : MonoBehaviour
         isFacingRight = moveInput.x > 0;
         isTouchingGround = myFeetCollider2D.IsTouchingLayers(groundLayer);
 
+        if (isTouchingGround)
+            _canWallJump = false;
+
         //Wall Jumpy
-        if (collidedWithWall)
+        if (isFacingRight)
         {
-            if (isFacingRight)
-            {
-                WallCheckHit = Physics2D.Raycast(transform.position, new Vector2(wallDistance, 0), wallDistance, groundLayer);
-                Debug.DrawRay(transform.position, new Vector2(wallDistance, 0), Color.blue);
-            }
-            else
-            {
-                WallCheckHit = Physics2D.Raycast(transform.position, new Vector2(-wallDistance, 0), wallDistance, groundLayer);
-                Debug.DrawRay(transform.position, new Vector2(-wallDistance, 0), Color.blue);
-            }
+            WallCheckHit = Physics2D.Raycast(transform.position, new Vector2(wallDistance, 0), wallDistance, groundLayer);
+            Debug.DrawRay(transform.position, new Vector2(wallDistance, 0), Color.blue);
+        }
+        else
+        {
+            WallCheckHit = Physics2D.Raycast(transform.position, new Vector2(-wallDistance, 0), wallDistance, groundLayer);
+            Debug.DrawRay(transform.position, new Vector2(-wallDistance, 0), Color.blue);
+        }
 
-            // if player is trying to move toward the wall
-            if (WallCheckHit && !isTouchingGround && moveInput.x != 0)
-            {
-                isWallSliding = true;
+        // if player is trying to move toward the wall
+        if (WallCheckHit && !isTouchingGround && moveInput.x != 0)
+        {
+            isWallSliding = true;
 
-                // to give buffer time to wall jump
-                jumpTime = Time.time + wallJumpTime;
-            }
-            else if (jumpTime < Time.time)
-            {
+            // to give buffer time to wall jump
+            jumpTime = Time.time + wallJumpTime;
+        }
+        else if (jumpTime < Time.time)
+        {
 
-                isWallSliding = false;
-                collidedWithWall = false;
-            }
+            isWallSliding = false;
+        }
 
-            // Grappling wall slide, slow wall speed
-            if (isWallSliding)
-            {
-                Debug.Log(myRigidBody.velocity);
-                myRigidBody.velocity = new Vector2(myRigidBody.velocity.x, Mathf.Clamp(myRigidBody.velocity.y, wallSlideSpeed, float.MaxValue));
-            }
+        // Grappling wall slide, slow wall speed
+        if (isWallSliding && WallCheckHit)
+        {
+            Debug.Log(myRigidBody.velocity);
+            myRigidBody.velocity = new Vector2(myRigidBody.velocity.x, Mathf.Clamp(myRigidBody.velocity.y, wallSlideSpeed, float.MaxValue));
         }
     }
 
@@ -175,6 +175,7 @@ public class Player : MonoBehaviour
 
             float direction = Mathf.Sign(transform.localScale.x);
             myRigidBody.velocity = new Vector2(direction * dashSpeed, myRigidBody.velocity.y);
+
         }
     }
 
@@ -251,15 +252,26 @@ public class Player : MonoBehaviour
         Vector2 playerVelocity = myRigidBody.velocity;
 
         bool isTouchingGround = myFeetCollider2D.IsTouchingLayers(groundLayer);
-        bool isMoving = isTouchingGround && Mathf.Abs(playerVelocity.x) > Mathf.Epsilon && !isWallSliding;
-        bool isJumping = !isTouchingGround && Mathf.Abs(playerVelocity.y) > Mathf.Epsilon && playerVelocity.y > 0 && !isWallSliding;
-        bool isFalling = !isTouchingGround && Mathf.Abs(playerVelocity.y) > Mathf.Epsilon && playerVelocity.y <= 0 && !isWallSliding;
+        bool isMoving = isTouchingGround && Mathf.Abs(playerVelocity.x) > Mathf.Epsilon;
+        bool isJumping = !isTouchingGround && Mathf.Abs(playerVelocity.y) > Mathf.Epsilon && playerVelocity.y > 0;
+        bool isFalling = !isTouchingGround && Mathf.Abs(playerVelocity.y) > Mathf.Epsilon && playerVelocity.y <= 0;
+
+        if (isFacingRight)
+        {
+            WallCheckHit = Physics2D.Raycast(transform.position, new Vector2(wallDistance, 0), wallDistance, groundLayer);
+            Debug.DrawRay(transform.position, new Vector2(wallDistance, 0), Color.blue);
+        }
+        else
+        {
+            WallCheckHit = Physics2D.Raycast(transform.position, new Vector2(-wallDistance, 0), wallDistance, groundLayer);
+            Debug.DrawRay(transform.position, new Vector2(-wallDistance, 0), Color.blue);
+        }
 
         if (!isSwallowing)
         {
             if (isDashing)
                 state = Enum.PlayerAnimation.Dashing;
-            else if (isWallSliding)
+            else if (isWallSliding && WallCheckHit)
                 state = Enum.PlayerAnimation.WallSliding;
             else if (isJumping)
                 state = Enum.PlayerAnimation.Jumping;
@@ -301,7 +313,7 @@ public class Player : MonoBehaviour
             isTouchingGround = myFeetCollider2D.IsTouchingLayers(LayerMask.GetMask(Enum.Tags.Platform.ToString()));
 
             // jump while player is touching ground / or wall sliding
-            if (isTouchingGround || isWallSliding)
+            if (isTouchingGround || _canWallJump)
             {
                 float speed = jumpSpeed + (isWallSliding ? wallJumpBoost : 0);
                 myRigidBody.velocity += new Vector2(0f, speed);
@@ -309,9 +321,7 @@ public class Player : MonoBehaviour
                 //play audio 
                 audioPlayer.PlaySoundEffect(Enum.SoundEffects.PlayerJump);
 
-                isWallSliding = false;
-                collidedWithWall = false;
-
+                _canWallJump = false;
             }
         }
     }
@@ -320,9 +330,10 @@ public class Player : MonoBehaviour
     {
         if(!isDashing)
         {
-            dashTime = startDashTime;
             isDashing = true;
 
+            dashTime = startDashTime;
+            
             //play audio 
             audioPlayer.PlaySoundEffect(Enum.SoundEffects.PlayerDash);
         }
@@ -410,7 +421,7 @@ public class Player : MonoBehaviour
             isTouchingGround = myFeetCollider2D.IsTouchingLayers(groundLayer);
             if (!isTouchingGround)
             {
-                collidedWithWall = true;
+                _canWallJump = true;
             }
         }
     }
