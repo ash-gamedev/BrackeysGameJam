@@ -23,4 +23,5 @@ public class Item : MonoBehaviour
         float delay = myAnimator.GetCurrentAnimatorStateInfo(0).length;
         Destroy(gameObject, delay);
     }
+
 }

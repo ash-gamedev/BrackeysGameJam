@@ -328,7 +328,12 @@ public class Player : MonoBehaviour
     
     void OnDash(InputValue value)
     {
-        if(!isDashing)
+        if (isObject)
+        {
+            ChangeIntoPlayer();
+            transform.localScale = new Vector2(1f, 1f); // face right
+        }
+        if (!isDashing)
         {
             isDashing = true;
 
