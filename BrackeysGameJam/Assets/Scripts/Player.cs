@@ -14,9 +14,10 @@ public class Player : MonoBehaviour
     [Header("Dash")]
     [SerializeField] float dashSpeed = 1f;
     [SerializeField] float startDashTime = 1f;
+    [SerializeField] float dashCoolDown = 1f;
     float dashTime;
     bool isDashing = false;
-    string dashDirection;
+    bool canDash = true;
 
     [Header("Wall Jump")]
     [SerializeField] float wallJumpTime = 0.2f;
@@ -286,6 +287,11 @@ public class Player : MonoBehaviour
         }
     }
 
+    void SetCanDashTrue()
+    {
+        canDash = true;
+    }
+
     void ChangeAnimationState(Enum.PlayerAnimation newState)
     {
         //stop the same animation from interuptting itself
@@ -338,17 +344,23 @@ public class Player : MonoBehaviour
     
     void OnDash(InputValue value)
     {
-        if (isObject)
+        if (!isDashing && canDash)
         {
-            ChangeIntoPlayer();
-            transform.localScale = new Vector2(1f, 1f); // face right
-        }
-        if (!isDashing)
-        {
+            canDash = false;
+
+            if (isObject)
+            {
+                ChangeIntoPlayer();
+                transform.localScale = new Vector2(1f, 1f); // face right
+            }
+
             isDashing = true;
 
             dashTime = startDashTime;
-            
+
+            //dash cooldown
+            Invoke("SetCanDashTrue", dashCoolDown);
+
             //play audio 
             audioPlayer.PlaySoundEffect(Enum.SoundEffects.PlayerDash);
         }

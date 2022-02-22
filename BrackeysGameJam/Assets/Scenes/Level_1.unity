@@ -66368,6 +66368,10 @@ PrefabInstance:
       value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1530623498411874060, guid: 341ebf156b7d1cd45a1e20f16935e47b, type: 3}
+      propertyPath: dashCoolDown
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1530623498411874060, guid: 341ebf156b7d1cd45a1e20f16935e47b, type: 3}
       propertyPath: swallowRange
       value: 1
       objectReference: {fileID: 0}
