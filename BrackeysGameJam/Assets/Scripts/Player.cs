@@ -232,7 +232,7 @@ public class Player : MonoBehaviour
         float delay = myAnimator.GetCurrentAnimatorStateInfo(0).length;
         Invoke("SwallowComplete", delay);
 
-        Destroy(itemObject);
+        item.Swallowed();
 
         canChange = true;
     }
@@ -303,8 +303,6 @@ public class Player : MonoBehaviour
             // jump while player is touching ground / or wall sliding
             if (isTouchingGround || isWallSliding)
             {
-                Debug.Log("Jump - collidedWithTall : " + collidedWithWall);
-
                 float speed = jumpSpeed + (isWallSliding ? wallJumpBoost : 0);
                 myRigidBody.velocity += new Vector2(0f, speed);
 
@@ -385,7 +383,6 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.CompareTag(Enum.Tags.Spikes.ToString()))
         {
-            Debug.Log("Death by spikes");
             Die();
         }
 
@@ -401,7 +398,6 @@ public class Player : MonoBehaviour
             }
             else
             {
-                Debug.Log("Death by collision with enemy");
                 Debug.Log(collision);
                 Debug.Log(isDashing);
                 if(!isObject)
@@ -414,7 +410,6 @@ public class Player : MonoBehaviour
             isTouchingGround = myFeetCollider2D.IsTouchingLayers(groundLayer);
             if (!isTouchingGround)
             {
-                Debug.Log("Wall Collide");
                 collidedWithWall = true;
             }
         }
