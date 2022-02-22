@@ -305,6 +305,17 @@
                 },
                 {
                     "name": "",
+                    "id": "7fbe27ad-ef29-4663-855d-371fe7c920e2",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ChangeIntoObject",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "32bfd120-4de6-4a46-9a57-36f255240842",
                     "path": "<Keyboard>/q",
                     "interactions": "",
