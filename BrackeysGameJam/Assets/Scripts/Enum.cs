@@ -19,7 +19,8 @@ public class Enum : MonoBehaviour
         Falling,
         Dashing,
         Dying,
-        Swallowing
+        Swallowing,
+        WallSliding
     }
 
     public enum SoundEffects

@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 837761737857610318}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.393, y: -0.04, z: 0}
+  m_LocalPosition: {x: -2.64, y: -0.032, z: 0}
   m_LocalScale: {x: 2.3825, y: 2.3825, z: 2.3825}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -72,11 +72,11 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1316249083
-  m_SortingLayer: 3
+  m_SortingLayerID: -2038779919
+  m_SortingLayer: 7
   m_SortingOrder: -1
-  m_Sprite: {fileID: 21300000, guid: 81c78587ce00c454e9812fc44215acc3, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: c1c6cc61c378a404d993c1cb68ba7dca, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.5803922}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -98,6 +98,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24203c7bcbdbb8a43b6c4240bc7e9668, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyArrow: {fileID: 7513525294466923285, guid: 20d87b0d404e8d04385846ec8bca84e6, type: 3}
+  flashLightSightDistance: 0
 --- !u!60 &837761737857610353
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -113,9 +115,9 @@ PolygonCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0.05, w: 0}
+    border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.6, y: 1.1}
+    oldSize: {x: 1.8, y: 1}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -123,10 +125,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.72227496, y: 0.10184746}
-      - {x: 0.72459096, y: -0.47702497}
-      - {x: -0.8008443, y: -0.49831238}
-      - {x: -0.7910577, y: 0.49720845}
+    - - {x: 0.80244166, y: 0.07633985}
+      - {x: 0.8047579, y: -0.4697372}
+      - {x: -0.96482193, y: -0.5056002}
+      - {x: -0.9659672, y: 0.5883071}
 --- !u!1 &837761739145758011
 GameObject:
   m_ObjectHideFlags: 0
@@ -204,7 +206,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1316249083
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: -1658666836, guid: 239fd678510126b4caec25e71fb7ee6e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -292,8 +294,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47bcbf6e4214e924c86914e52a77135e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1
-  walkDistance: 3
+  moveSpeed: 2.5
+  walkDistance: 5
 --- !u!95 &1946934127
 Animator:
   serializedVersion: 4

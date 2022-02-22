@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
+    #region Variables
     [Header("Movement")]
     [SerializeField] float moveSpeed = 1f;
     [SerializeField] int jumpSpeed = 5;
@@ -17,12 +18,13 @@ public class Player : MonoBehaviour
     bool isDashing = false;
 
     [Header("Wall Jump")]
-    //[SerializeField] float wallJumpTime = 0.2f;
-    //[SerializeField] float wallSlideSpeed = 0.001f;
-    //[SerializeField] float wallDistance = 0.5f;
+    [SerializeField] float wallJumpTime = 0.2f;
+    [SerializeField] float wallSlideSpeed = 0.001f;
+    [SerializeField] float wallDistance = 0.5f;
     [SerializeField] bool isWallSliding = false;
     RaycastHit2D WallCheckHit;
     float jumpTime;
+    bool collidedWithWall = false;
 
     //items
     [Header("Change/Swallow")]
@@ -35,9 +37,12 @@ public class Player : MonoBehaviour
 
     [Header("For testing:")]
     [SerializeField] bool isObject = false;
-    
+
+    bool isTouchingGround;
+    LayerMask groundLayer;
     Rigidbody2D myRigidBody;
-    CapsuleCollider2D myBodyCollider;
+    BoxCollider2D myBodyCollider;
+    CapsuleCollider2D myFeetCollider2D;
     Animator myAnimator;
     Enum.PlayerAnimation playerAnimationState;
 
@@ -45,12 +50,18 @@ public class Player : MonoBehaviour
     AudioPlayer audioPlayer;
 
     bool isAlive = true;
-    
+
+    // Private variables: to track movement
+    bool isFacingRight;
+    #endregion
+
     #region Start, Update, Awake
     void Start()
     {
+        groundLayer = LayerMask.GetMask("Platform");
         myRigidBody = GetComponent<Rigidbody2D>();
-        myBodyCollider = GetComponent<CapsuleCollider2D>();
+        myBodyCollider = GetComponent<BoxCollider2D>();
+        myFeetCollider2D = GetComponent<CapsuleCollider2D>();
         playerSpriteRenderer = GetComponent<SpriteRenderer>();
         myAnimator = GetComponent<Animator>();
         audioPlayer = FindObjectOfType<AudioPlayer>();
@@ -64,6 +75,50 @@ public class Player : MonoBehaviour
         FlipSprite();
         SetAnimation();
     }
+
+    private void FixedUpdate()
+    {
+        if (!isAlive) return;
+        isFacingRight = moveInput.x > 0;
+        isTouchingGround = myFeetCollider2D.IsTouchingLayers(groundLayer);
+
+        //Wall Jumpy
+        if (collidedWithWall)
+        {
+            if (isFacingRight)
+            {
+                WallCheckHit = Physics2D.Raycast(transform.position, new Vector2(wallDistance, 0), wallDistance, groundLayer);
+                Debug.DrawRay(transform.position, new Vector2(wallDistance, 0), Color.blue);
+            }
+            else
+            {
+                WallCheckHit = Physics2D.Raycast(transform.position, new Vector2(-wallDistance, 0), wallDistance, groundLayer);
+                Debug.DrawRay(transform.position, new Vector2(-wallDistance, 0), Color.blue);
+            }
+
+            // if player is trying to move toward the wall
+            if (WallCheckHit && !isTouchingGround && moveInput.x != 0)
+            {
+                isWallSliding = true;
+
+                // to give buffer time to wall jump
+                jumpTime = Time.time + wallJumpTime;
+            }
+            else if (jumpTime < Time.time)
+            {
+
+                isWallSliding = false;
+                collidedWithWall = false;
+            }
+
+            // Grappling wall slide, slow wall speed
+            if (isWallSliding)
+            {
+                myRigidBody.velocity = new Vector2(myRigidBody.velocity.x, Mathf.Clamp(myRigidBody.velocity.y, wallSlideSpeed, float.MaxValue));
+            }
+        }
+    }
+
     #endregion
 
     #region public functions
@@ -187,15 +242,17 @@ public class Player : MonoBehaviour
 
         Vector2 playerVelocity = myRigidBody.velocity;
 
-        bool isTouchingGround = myBodyCollider.IsTouchingLayers(LayerMask.GetMask("Platform"));
-        bool isMoving = isTouchingGround && Mathf.Abs(playerVelocity.x) > Mathf.Epsilon;
-        bool isJumping = !isTouchingGround && Mathf.Abs(playerVelocity.y) > Mathf.Epsilon && playerVelocity.y > 0;
+        bool isTouchingGround = myFeetCollider2D.IsTouchingLayers(groundLayer);
+        bool isMoving = isTouchingGround && Mathf.Abs(playerVelocity.x) > Mathf.Epsilon && !isWallSliding;
+        bool isJumping = !isTouchingGround && Mathf.Abs(playerVelocity.y) > Mathf.Epsilon && playerVelocity.y > 0 && !isWallSliding;
         bool isFalling = !isTouchingGround && Mathf.Abs(playerVelocity.y) > Mathf.Epsilon && playerVelocity.y <= 0 && !isWallSliding;
 
         if (!isSwallowing)
         {
             if (isDashing)
                 state = Enum.PlayerAnimation.Dashing;
+            else if (isWallSliding)
+                state = Enum.PlayerAnimation.WallSliding;
             else if (isJumping)
                 state = Enum.PlayerAnimation.Jumping;
             else if (isFalling)
@@ -233,15 +290,21 @@ public class Player : MonoBehaviour
         if (!isAlive || isObject) return;
         if (value.isPressed)
         {
-            bool isTouchingGround = myBodyCollider.IsTouchingLayers(LayerMask.GetMask("Platform"));
+            isTouchingGround = myFeetCollider2D.IsTouchingLayers(LayerMask.GetMask(Enum.Tags.Platform.ToString()));
 
-            // jump while player is touching ground
+            // jump while player is touching ground / or wall sliding
             if (isTouchingGround || isWallSliding)
             {
+                Debug.Log("Jump - collidedWithTall : " + collidedWithWall);
+
                 myRigidBody.velocity += new Vector2(0f, jumpSpeed);
 
                 //play audio 
                 audioPlayer.PlaySoundEffect(Enum.SoundEffects.PlayerJump);
+
+                isWallSliding = false;
+                collidedWithWall = false;
+
             }
         }
     }
@@ -323,9 +386,18 @@ public class Player : MonoBehaviour
                     Die();
             }
         }
+
+        else if (collision.gameObject.CompareTag(Enum.Tags.Platform.ToString()))
+        {
+            isTouchingGround = myFeetCollider2D.IsTouchingLayers(groundLayer);
+            if (!isTouchingGround)
+            {
+                Debug.Log("Wall Collide");
+                collidedWithWall = true;
+            }
+        }
     }
-    
-    
+
     #endregion
 
     #endregion
