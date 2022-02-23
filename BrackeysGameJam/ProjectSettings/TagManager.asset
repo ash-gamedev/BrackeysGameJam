@@ -50,6 +50,9 @@ TagManager:
   - name: Background
     uniqueID: 2913027149
     locked: 0
+  - name: BackgroundDecor
+    uniqueID: 1649477
+    locked: 0
   - name: Spikes
     uniqueID: 488691405
     locked: 0

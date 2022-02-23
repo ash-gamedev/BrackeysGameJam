@@ -9,7 +9,10 @@ namespace Assets.Scripts
         [SerializeField] float flashLightSightDistance;
         [SerializeField] float flashLightOffTime = 0f;
         [SerializeField] float flashLightOnTime = 0f;
-        bool killPlayer = false;
+        [SerializeField] float attackDelay = 0.2f; // allow a small amount of time where player is moving in light, before trying to kill
+        bool canShootPlayer = false;
+        bool playerInLight = false;
+        bool shootPlayer = false;
         bool flashLightOn = true;
 
         PolygonCollider2D flashLightCollider;
@@ -27,7 +30,7 @@ namespace Assets.Scripts
 
         IEnumerator SwitchFlashlight()
         {
-            while(killPlayer == false)
+            while(shootPlayer == false)
             {
                 // flashlight on
                 flashLightOn = true;
@@ -47,26 +50,54 @@ namespace Assets.Scripts
 
         public bool GetIsKillingPlayer() 
         {
-            return killPlayer;
+            return shootPlayer;
         }
 
         public bool GetIsFlashLightOn()
         {
             return flashLightOn;
         }
+
+        void SetCanShootPlayer()
+        {
+            if (playerInLight)
+                canShootPlayer = true;
+            else
+                canShootPlayer = false;
+        }
+
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (collision.CompareTag(Enum.Tags.Player.ToString()) && !playerInLight)
+            {
+                playerInLight = true;
+                Invoke("SetCanShootPlayer", attackDelay);
+            }
+        }
+
         private void OnTriggerStay2D(Collider2D collision)
         {
-            if (collision.CompareTag("Player"))
+            if (collision.CompareTag(Enum.Tags.Player.ToString()) && canShootPlayer)
             {
                 Player player = collision.GetComponent<Player>();
                 bool? isPlayerAnObject = player?.GetIsPlayerAnObject();
-                if(player != null && isPlayerAnObject == false && killPlayer == false)
+                if(player != null && isPlayerAnObject == false && shootPlayer == false)
                 {
-                    killPlayer = true;
+                    shootPlayer = true;
                     ShootPlayer();
                 }
             }
         }
+
+        private void OnTriggerExit2D(Collider2D collision)
+        {
+            if (collision.CompareTag(Enum.Tags.Player.ToString()))
+            {
+                playerInLight = false;
+                canShootPlayer = false;
+            }
+        }
+
 
         void ShootPlayer()
         {

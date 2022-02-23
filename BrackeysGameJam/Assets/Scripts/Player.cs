@@ -120,7 +120,6 @@ public class Player : MonoBehaviour
         // Grappling wall slide, slow wall speed
         if (isWallSliding && WallCheckHit)
         {
-            Debug.Log(myRigidBody.velocity);
             myRigidBody.velocity = new Vector2(myRigidBody.velocity.x, Mathf.Clamp(myRigidBody.velocity.y, wallSlideSpeed, float.MaxValue));
         }
     }
@@ -257,7 +256,7 @@ public class Player : MonoBehaviour
         bool isTouchingGround = myFeetCollider2D.IsTouchingLayers(groundLayer);
         bool isMoving = isTouchingGround && Mathf.Abs(playerVelocity.x) > Mathf.Epsilon;
         bool isJumping = !isTouchingGround && Mathf.Abs(playerVelocity.y) > Mathf.Epsilon && playerVelocity.y > 0;
-        bool isFalling = !isTouchingGround && Mathf.Abs(playerVelocity.y) > Mathf.Epsilon && playerVelocity.y <= 0;
+        bool isFalling = !isTouchingGround && Mathf.Abs(playerVelocity.y) > Mathf.Epsilon && playerVelocity.y < 0;
 
         if (isFacingRight)
         {
