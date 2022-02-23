@@ -6,9 +6,14 @@ using UnityEngine.UI;
 
 public class GameSession : MonoBehaviour
 {
+    [Header("UI")]
+    [SerializeField] TextMeshProUGUI playerGemsText;
+
+    [Header("General")]
     [SerializeField] int playerLives = 1;
     [SerializeField] float timeBeforeLevelLoad = 1f;
 
+    int playerGems = 0;
     // Awake happens before start
     void Awake()
     {
@@ -24,6 +29,33 @@ public class GameSession : MonoBehaviour
         }
     }
 
+    void Start()
+    {
+        UpdatePlayerGemsText();
+    }
+    
+    public int GetPlayerGems()
+    {
+        return playerGems;
+    }
+    
+    public void IncreasePlayerGems(int amount)
+    {
+        playerGems += amount;
+        UpdatePlayerGemsText();
+    }
+
+    public void UpdatePlayerGemsText()
+    {
+        playerGemsText.text =  playerGems.ToString() + " x";
+    }
+
+    void ResetPlayerGems()
+    {
+        playerGems = 0;
+        UpdatePlayerGemsText();
+    }
+
     public void ProcessPlayerDeath()
     {
         TakeLife();
@@ -32,6 +64,7 @@ public class GameSession : MonoBehaviour
     void TakeLife()
     {
         playerLives--;
+        ResetPlayerGems();
 
         //reload current scene
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
