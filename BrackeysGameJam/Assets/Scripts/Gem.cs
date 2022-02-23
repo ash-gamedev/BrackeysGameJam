@@ -19,8 +19,8 @@ namespace Assets.Scripts
         {
             if (collision.CompareTag("Player") && !isCoinPickedUp)
             {
-                // TODO play sound effect
-                //audioPlayer.PlaySoundEffect
+                // play sound effect
+                audioPlayer.PlaySoundEffect(Enum.SoundEffects.GemPickUp);
 
                 // delete game object
                 Destroy(gameObject);

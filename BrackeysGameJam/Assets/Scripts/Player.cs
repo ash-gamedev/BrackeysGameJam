@@ -37,6 +37,7 @@ public class Player : MonoBehaviour
     SpriteRenderer playerSpriteRenderer;
     bool canChange = false;
     bool isSwallowing = false;
+    float swallowTime;
 
     [Header("Enemy")]
     [SerializeField] ParticleSystem EnemyDeathParticleEffect;
@@ -62,7 +63,7 @@ public class Player : MonoBehaviour
     #endregion
 
     #region Start, Update, Awake
-    void Start()
+    void Awake()
     {
         groundLayer = LayerMask.GetMask("Platform");
         myRigidBody = GetComponent<Rigidbody2D>();
@@ -71,6 +72,11 @@ public class Player : MonoBehaviour
         playerSpriteRenderer = GetComponent<SpriteRenderer>();
         myAnimator = GetComponent<Animator>();
         audioPlayer = FindObjectOfType<AudioPlayer>();
+    }
+
+    private void Start()
+    {
+        UpdateAnimClipTimes();
     }
 
     void Update()
@@ -142,13 +148,14 @@ public class Player : MonoBehaviour
         // first make sure player sprite is enabled
         ChangeIntoPlayer();
 
+        //play audio 
+        audioPlayer.PlaySoundEffect(Enum.SoundEffects.PlayerDeath);
+
         // play animation
         ChangeAnimationState(Enum.PlayerAnimation.Dying);
         float destroyDelay = myAnimator.GetCurrentAnimatorStateInfo(0).length;
 
-        //play audio 
-        audioPlayer.PlaySoundEffect(Enum.SoundEffects.PlayerDeath);
-
+        
         FindObjectOfType<GameSession>().ProcessPlayerDeath();
     }
     #endregion
@@ -231,9 +238,11 @@ public class Player : MonoBehaviour
         }
 
         isSwallowing = true;
+
+        audioPlayer.PlaySoundEffect(Enum.SoundEffects.PlayerSwallow);
         ChangeAnimationState(Enum.PlayerAnimation.Swallowing);
-        float delay = myAnimator.GetCurrentAnimatorStateInfo(0).length;
-        Invoke("SwallowComplete", delay);
+        Debug.Log("swallow time: " + swallowTime);
+        Invoke("SwallowComplete", swallowTime);
 
         item.Swallowed();
 
@@ -242,6 +251,7 @@ public class Player : MonoBehaviour
     
     void SwallowComplete()
     {
+        Debug.Log("Swallow complete");
         isSwallowing = false;
     }
 
@@ -304,7 +314,17 @@ public class Player : MonoBehaviour
         //reassign current state
         playerAnimationState = newState;
     }
-    
+
+    public void UpdateAnimClipTimes()
+    {
+        AnimationClip[] clips = myAnimator.runtimeAnimatorController.animationClips;
+        foreach (AnimationClip clip in clips)
+        {
+            if (clip.name.Contains(Enum.PlayerAnimation.Swallowing.ToString()))
+                swallowTime = clip.length;
+        }
+    }
+
     #region input functions
     void OnMove(InputValue value)
     {

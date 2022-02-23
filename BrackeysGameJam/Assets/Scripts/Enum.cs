@@ -37,7 +37,9 @@ public class Enum : MonoBehaviour
         PlayerJump,
         PlayerDash,
         PlayerDeath,
-        EnemyProjectile
+        PlayerSwallow,
+        EnemyProjectile,
+        GemPickUp
     }
 
 }

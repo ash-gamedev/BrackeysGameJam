@@ -4,11 +4,15 @@ using UnityEngine;
 public class EnemyArrow : MonoBehaviour
 {
     [SerializeField] float speed = 1f;
+    AudioPlayer audioPlayer;
     Player player;
 
     void Start()
     {
         player = FindObjectOfType<Player>();
+
+        audioPlayer = FindObjectOfType<AudioPlayer>();
+        audioPlayer.PlaySoundEffect(Enum.SoundEffects.EnemyProjectile);
 
         // flip to target player
         if(player.transform.position.x < transform.position.x)
