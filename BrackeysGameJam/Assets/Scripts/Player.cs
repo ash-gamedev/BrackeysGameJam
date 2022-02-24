@@ -28,6 +28,7 @@ public class Player : MonoBehaviour
     RaycastHit2D WallCheckHit;
     float jumpTime;
     bool _canWallJump = false;
+    bool _firstWallJump = false;
 
     //items
     [Header("Change/Swallow")]
@@ -471,6 +472,15 @@ public class Player : MonoBehaviour
             {
                 _canWallJump = true;
             }
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        // when their feet collide leaves the platform, can wall jump
+        if (collision.gameObject.CompareTag(Enum.Tags.Platform.ToString()))
+        {
+            _canWallJump = true;
         }
     }
 
