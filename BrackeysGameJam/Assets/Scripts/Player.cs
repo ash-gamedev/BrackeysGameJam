@@ -269,17 +269,6 @@ public class Player : MonoBehaviour
         bool isJumping = !isTouchingGround && Mathf.Abs(playerVelocity.y) > Mathf.Epsilon && playerVelocity.y > 0;
         bool isFalling = !isTouchingGround && Mathf.Abs(playerVelocity.y) > Mathf.Epsilon && playerVelocity.y < 0;
 
-        if (isFacingRight)
-        {
-            WallCheckHit = Physics2D.Raycast(transform.position, new Vector2(wallDistance, 0), wallDistance, groundLayer);
-            Debug.DrawRay(transform.position, new Vector2(wallDistance, 0), Color.blue);
-        }
-        else
-        {
-            WallCheckHit = Physics2D.Raycast(transform.position, new Vector2(-wallDistance, 0), wallDistance, groundLayer);
-            Debug.DrawRay(transform.position, new Vector2(-wallDistance, 0), Color.blue);
-        }
-
         if (!isSwallowing)
         {
             if (isDashing)
@@ -350,8 +339,9 @@ public class Player : MonoBehaviour
         {
             isTouchingGround = myFeetCollider2D.IsTouchingLayers(LayerMask.GetMask(Enum.Tags.Platform.ToString()));
 
+
             // jump while player is touching ground / or wall sliding
-            if (isTouchingGround || _canWallJump)
+            if (isTouchingGround || (_canWallJump && WallCheckHit))
             {
                 float speed = jumpSpeed + (isWallSliding ? wallJumpBoost : 0);
                 myRigidBody.velocity += new Vector2(0f, speed);
@@ -436,6 +426,7 @@ public class Player : MonoBehaviour
             }
         }
     }
+    
     #endregion
 
     #region Collisions
