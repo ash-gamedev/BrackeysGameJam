@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d1514134bc4fbd41bb739b1b9a49231, type: 3}
   m_Name: Background Tile
   m_EditorClassIdentifier: 
-  m_DefaultSprite: {fileID: -1202453311, guid: 783041d9177620a40a6faea9c50725ec, type: 3}
+  m_DefaultSprite: {fileID: 1941759108, guid: 6d0c44454afc082488b33daeeab25df7, type: 3}
   m_DefaultGameObject: {fileID: 0}
   m_DefaultColliderType: 1
   m_TilingRules: []

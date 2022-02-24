@@ -47,10 +47,13 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Background
+  - name: Background Color
     uniqueID: 2913027149
     locked: 0
-  - name: BackgroundDecor
+  - name: Background Details
+    uniqueID: 2216111479
+    locked: 0
+  - name: Background Decor
     uniqueID: 1649477
     locked: 0
   - name: Spikes
@@ -58,6 +61,9 @@ TagManager:
     locked: 0
   - name: Platform
     uniqueID: 1392744345
+    locked: 0
+  - name: Foreground Details
+    uniqueID: 980574921
     locked: 0
   - name: Mask
     uniqueID: 3527646423

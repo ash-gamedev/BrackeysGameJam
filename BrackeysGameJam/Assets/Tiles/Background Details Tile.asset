@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d1514134bc4fbd41bb739b1b9a49231, type: 3}
   m_Name: Background Details Tile
   m_EditorClassIdentifier: 
-  m_DefaultSprite: {fileID: -781518254, guid: 783041d9177620a40a6faea9c50725ec, type: 3}
+  m_DefaultSprite: {fileID: -149956256, guid: 6d0c44454afc082488b33daeeab25df7, type: 3}
   m_DefaultGameObject: {fileID: 0}
   m_DefaultColliderType: 1
   m_TilingRules:
   - m_Id: 0
     m_Sprites:
-    - {fileID: -781518254, guid: 783041d9177620a40a6faea9c50725ec, type: 3}
-    - {fileID: 1829986947, guid: 783041d9177620a40a6faea9c50725ec, type: 3}
-    - {fileID: -1862839618, guid: 783041d9177620a40a6faea9c50725ec, type: 3}
+    - {fileID: -149956256, guid: 6d0c44454afc082488b33daeeab25df7, type: 3}
+    - {fileID: -441712585, guid: 6d0c44454afc082488b33daeeab25df7, type: 3}
+    - {fileID: -633990810, guid: 6d0c44454afc082488b33daeeab25df7, type: 3}
     m_GameObject: {fileID: 0}
     m_MinAnimationSpeed: 1
     m_MaxAnimationSpeed: 1
