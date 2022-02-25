@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4670159465251641481}
   - component: {fileID: 9002726011815630786}
   - component: {fileID: 7891242939829148744}
-  m_Layer: 12
+  m_Layer: 13
   m_Name: Gem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48,7 +48,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.039806962, y: -0.19903481}
+  m_Offset: {x: -0.00961256, y: -0.034303546}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -59,7 +59,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.0632432, y: 0.87591624}
+  m_Size: {x: 0.9644041, y: 0.9088626}
   m_EdgeRadius: 0
 --- !u!95 &9002726011815630786
 Animator:
@@ -93,7 +93,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e183455ad9d4e134e99040fa27ac1683, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coinPickupSFX: {fileID: 0}
 --- !u!1 &8132534869061196917
 GameObject:
   m_ObjectHideFlags: 0
@@ -104,7 +103,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7317839315994441186}
   - component: {fileID: 972689785723156634}
-  m_Layer: 12
+  m_Layer: 13
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -165,14 +164,14 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1362893197
-  m_SortingLayer: 6
+  m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: eafbd8497c05fd54fb342f3570286e48, type: 3}
+  m_Sprite: {fileID: -688525196, guid: eafbd8497c05fd54fb342f3570286e48, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.1428572, y: 1.1428572}
+  m_Size: {x: 0.9285714, y: 0.71428573}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
