@@ -341,7 +341,7 @@ public class Player : MonoBehaviour
 
 
             // jump while player is touching ground / or wall sliding
-            if (isTouchingGround || (_canWallJump && WallCheckHit))
+            if (isTouchingGround || _canWallJump && isWallSliding) 
             {
                 float speed = jumpSpeed + (isWallSliding ? wallJumpBoost : 0);
                 myRigidBody.velocity += new Vector2(0f, speed);
