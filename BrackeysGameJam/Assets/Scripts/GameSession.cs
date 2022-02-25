@@ -55,30 +55,42 @@ public class GameSession : MonoBehaviour
 
     public void SetSlimeObjectSliderValue(float value)
     {
-        timerSlider.value = value;
-
-        if(value <= 0)
+        if(timerSlider != null)
         {
-            ShowSlimeObjectBar(false);
+            timerSlider.value = value;
+
+            if (value <= 0)
+            {
+                ShowSlimeObjectBar(false);
+            }
         }
     }
 
     public void SetSlimeObjectMaxSliderValue(float maxValue)
     {
-        timerSlider.maxValue = maxValue;
-        ShowSlimeObjectBar(true);
+        if(timerSlider != null)
+        {
+            timerSlider.maxValue = maxValue;
+            ShowSlimeObjectBar(true);
+        }
     }
 
     public void SetSlimeObjectImage(Sprite sprite)
     {
-        slimeObjectImage.sprite = sprite;
-        slimeObjectImage.SetNativeSize();
+        if(slimeObjectImage != null)
+        {
+            slimeObjectImage.sprite = sprite;
+            slimeObjectImage.SetNativeSize();
+        }
     }
 
     public void ShowSlimeObjectBar(bool show)
     {
-        slimeObjectImage.enabled = show;
-        timerSlider.gameObject.SetActive(show);
+        if (slimeObjectImage != null && timerSlider != null)
+        {
+            slimeObjectImage.enabled = show;
+            timerSlider.gameObject.SetActive(show);
+        } 
     }
 
     void ResetPlayerGems()
@@ -95,8 +107,14 @@ public class GameSession : MonoBehaviour
     void TakeLife()
     {
         playerLives--;
+        ResetLevel();
+    }
+
+    void ResetLevel()
+    {
         ResetPlayerGems();
         SetSlimeObjectSliderValue(0);
+        ShowSlimeObjectBar(false);
 
         //reload current scene
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
@@ -113,9 +131,21 @@ public class GameSession : MonoBehaviour
 
     private IEnumerator LoadLevel(int sceneIndex)
     {
+        ShowSlimeObjectBar(false);
+
         yield return new WaitForSecondsRealtime(timeBeforeLevelLoad);
 
         SceneManager.LoadScene(sceneIndex);
     }
 
+    public void LoadNextLevel()
+    {
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        int nextSceneIndex = currentSceneIndex + 1;
+
+        if (nextSceneIndex == SceneManager.sceneCountInBuildSettings)
+            nextSceneIndex = 0;
+
+        StartCoroutine(LoadLevel(nextSceneIndex));
+    }
 }

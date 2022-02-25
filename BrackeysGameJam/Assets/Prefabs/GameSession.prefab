@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6460967205601568}
   - component: {fileID: 6460967205601569}
   - component: {fileID: 6460967205601574}
+  - component: {fileID: 7618986045232790256}
   m_Layer: 5
   m_Name: UI Canvas
   m_TagString: Untagged
@@ -102,6 +103,23 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &7618986045232790256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6460967205601575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30601acebbf9d5440a8184667d790354, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerGemsText: {fileID: 6460967268838576}
+  playerLives: 1
+  timeBeforeLevelLoad: 1
+  timerSlider: {fileID: 2344667872771067393}
+  slimeObjectImage: {fileID: 8429818252341079223}
 --- !u!1 &6460967268838582
 GameObject:
   m_ObjectHideFlags: 0
@@ -444,7 +462,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: -535554717, guid: 9d365d07fde1b6d4b91d964b3c3d16ab, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -463,9 +481,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6553531363255558038}
-  - component: {fileID: 6553531363255558057}
   m_Layer: 0
-  m_Name: GameSession 1
+  m_Name: GameSession
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -487,23 +504,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6553531363255558057
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6553531363255558056}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30601acebbf9d5440a8184667d790354, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerGemsText: {fileID: 6460967268838576}
-  playerLives: 1
-  timeBeforeLevelLoad: 1
-  timerSlider: {fileID: 2344667872771067393}
-  slimeObjectImage: {fileID: 8429818252341079223}
 --- !u!1 &6553531364277190408
 GameObject:
   m_ObjectHideFlags: 0

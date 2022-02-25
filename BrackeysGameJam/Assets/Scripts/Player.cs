@@ -74,14 +74,14 @@ public class Player : MonoBehaviour
         myFeetCollider2D = GetComponent<CapsuleCollider2D>();
         playerSpriteRenderer = GetComponent<SpriteRenderer>();
         myAnimator = GetComponent<Animator>();
-        audioPlayer = FindObjectOfType<AudioPlayer>();
-        gameSession = FindObjectOfType<GameSession>();
         slimeObjectTimer = GetComponent<SlimeObjectTimer>();
     }
 
     private void Start()
     {
         UpdateAnimClipTimes();
+        gameSession = FindObjectOfType<GameSession>();
+        audioPlayer = FindObjectOfType<AudioPlayer>();
     }
 
     void Update()

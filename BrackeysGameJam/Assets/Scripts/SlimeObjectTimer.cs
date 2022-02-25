@@ -12,7 +12,6 @@ public class SlimeObjectTimer : MonoBehaviour
 
     public void ResetTimer()
     {
-        Debug.Log("Resetting Timer");
         stopTimer = false;
         gameSession.SetSlimeObjectMaxSliderValue(gameTime);
         gameSession.SetSlimeObjectSliderValue(gameTime);
@@ -27,8 +26,6 @@ public class SlimeObjectTimer : MonoBehaviour
 
     void Update()
     {
-        Debug.Log("Player is object: " + player.GetIsPlayerAnObject());
-
         // decrease time when player is object
         if (player.GetIsPlayerAnObject())
         {
