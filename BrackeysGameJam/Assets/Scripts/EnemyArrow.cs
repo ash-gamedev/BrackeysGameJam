@@ -6,6 +6,7 @@ public class EnemyArrow : MonoBehaviour
     [SerializeField] float speed = 1f;
     AudioPlayer audioPlayer;
     Player player;
+    
 
     void Start()
     {
@@ -13,10 +14,6 @@ public class EnemyArrow : MonoBehaviour
 
         audioPlayer = FindObjectOfType<AudioPlayer>();
         audioPlayer.PlaySoundEffect(Enum.SoundEffects.EnemyProjectile);
-
-        // flip to target player
-        if(player.transform.position.x < transform.position.x)
-            transform.localScale = new Vector2(-1f, 1f);
     }
 
     void Update()
@@ -30,6 +27,7 @@ public class EnemyArrow : MonoBehaviour
         transform.position = Vector2.MoveTowards(transform.position, target, speed * Time.deltaTime);
 
         // todo: rotate to look at player
+        transform.right = target - new Vector2(transform.position.x, transform.position.y);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
