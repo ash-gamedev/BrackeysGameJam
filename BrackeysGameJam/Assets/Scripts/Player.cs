@@ -259,6 +259,7 @@ public class Player : MonoBehaviour
         Invoke("SwallowComplete", swallowTime);
 
         // reset object lifebar
+        gameSession.SetSlimeObjectImage(item.objectIcon);
         slimeObjectTimer.ResetTimer();
 
         item.Swallowed();

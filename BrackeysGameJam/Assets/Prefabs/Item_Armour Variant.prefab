@@ -60,6 +60,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: -1821585516, guid: 9d365d07fde1b6d4b91d964b3c3d16ab, type: 3}
     - target: {fileID: 8445699087997805906, guid: 723a7e544147d6c4f916f3a0e701c0f4, type: 3}
+      propertyPath: objectIcon
+      value: 
+      objectReference: {fileID: 21300000, guid: 96a9115c85a1a9142aa255975069a220, type: 3}
+    - target: {fileID: 8445699087997805906, guid: 723a7e544147d6c4f916f3a0e701c0f4, type: 3}
       propertyPath: slimeObject
       value: 
       objectReference: {fileID: 3477507403530567748, guid: 0ef777ab2aa9b044080b0c4c0f08597e, type: 3}

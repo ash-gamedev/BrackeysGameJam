@@ -74,7 +74,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1362893197
-  m_SortingLayer: 5
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: f5df4198e6d471248a3b735a61561a2d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -126,6 +126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slimeObject: {fileID: 4709893636030616585, guid: 2f86497e84a3da44786cb867dbe61eb9, type: 3}
+  objectIcon: {fileID: -535554717, guid: 9d365d07fde1b6d4b91d964b3c3d16ab, type: 3}
 --- !u!95 &40755725
 Animator:
   serializedVersion: 4

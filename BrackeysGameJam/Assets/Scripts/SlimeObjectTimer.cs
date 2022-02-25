@@ -38,6 +38,7 @@ public class SlimeObjectTimer : MonoBehaviour
             {
                 stopTimer = true;
                 player.RemoveSlimeObject();
+                gameSession.ShowSlimeObjectBar(false);
             }
 
             if (stopTimer == false)

@@ -4,6 +4,7 @@ using UnityEngine;
 public class Item : MonoBehaviour
 {
     [SerializeField] GameObject slimeObject;
+    [SerializeField] public Sprite objectIcon;
 
     Animator myAnimator;
 
