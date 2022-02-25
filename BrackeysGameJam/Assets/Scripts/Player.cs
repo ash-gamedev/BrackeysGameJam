@@ -56,6 +56,8 @@ public class Player : MonoBehaviour
 
     //public object
     AudioPlayer audioPlayer;
+    GameSession gameSession;
+    SlimeObjectTimer slimeObjectTimer;
 
     bool isAlive = true;
 
@@ -73,6 +75,8 @@ public class Player : MonoBehaviour
         playerSpriteRenderer = GetComponent<SpriteRenderer>();
         myAnimator = GetComponent<Animator>();
         audioPlayer = FindObjectOfType<AudioPlayer>();
+        gameSession = FindObjectOfType<GameSession>();
+        slimeObjectTimer = GetComponent<SlimeObjectTimer>();
     }
 
     private void Start()
@@ -139,6 +143,13 @@ public class Player : MonoBehaviour
         return isObject;
     }
 
+    public void RemoveSlimeObject()
+    {
+        this.swallowedObject = null;
+        this.canChange = false;
+        ChangeIntoPlayer();
+    }
+
     public void Die()
     {
         isAlive = false;
@@ -157,7 +168,7 @@ public class Player : MonoBehaviour
         float destroyDelay = myAnimator.GetCurrentAnimatorStateInfo(0).length;
 
         
-        FindObjectOfType<GameSession>().ProcessPlayerDeath();
+        gameSession.ProcessPlayerDeath();
     }
     #endregion
 
@@ -240,10 +251,15 @@ public class Player : MonoBehaviour
 
         isSwallowing = true;
 
+        // sound effect
         audioPlayer.PlaySoundEffect(Enum.SoundEffects.PlayerSwallow);
+
+        // animation
         ChangeAnimationState(Enum.PlayerAnimation.Swallowing);
-        Debug.Log("swallow time: " + swallowTime);
         Invoke("SwallowComplete", swallowTime);
+
+        // reset object lifebar
+        slimeObjectTimer.ResetTimer();
 
         item.Swallowed();
 

@@ -12,6 +12,7 @@ public class GameSession : MonoBehaviour
     [Header("General")]
     [SerializeField] int playerLives = 1;
     [SerializeField] float timeBeforeLevelLoad = 1f;
+    [SerializeField] Slider timerSlider;
 
     int playerGems = 0;
     // Awake happens before start
@@ -32,6 +33,7 @@ public class GameSession : MonoBehaviour
     void Start()
     {
         UpdatePlayerGemsText();
+        SetSlimeObjectSliderValue(0);
     }
     
     public int GetPlayerGems()
@@ -50,6 +52,16 @@ public class GameSession : MonoBehaviour
         playerGemsText.text =  playerGems.ToString() + " x";
     }
 
+    public void SetSlimeObjectSliderValue(float value)
+    {
+        timerSlider.value = value;
+    }
+
+    public void SetSlimeObjectMaxSliderValue(float maxValue)
+    {
+        timerSlider.maxValue = maxValue;
+    }
+
     void ResetPlayerGems()
     {
         playerGems = 0;
@@ -65,6 +77,7 @@ public class GameSession : MonoBehaviour
     {
         playerLives--;
         ResetPlayerGems();
+        SetSlimeObjectSliderValue(0);
 
         //reload current scene
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
