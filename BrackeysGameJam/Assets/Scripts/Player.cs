@@ -28,7 +28,6 @@ public class Player : MonoBehaviour
     RaycastHit2D WallCheckHit;
     float jumpTime;
     bool _canWallJump = false;
-    bool _firstWallJump = false;
 
     //items
     [Header("Change/Swallow")]
@@ -56,7 +55,6 @@ public class Player : MonoBehaviour
 
     //public object
     AudioPlayer audioPlayer;
-    GameSession gameSession;
     SlimeObjectTimer slimeObjectTimer;
 
     bool isAlive = true;
@@ -80,7 +78,6 @@ public class Player : MonoBehaviour
     private void Start()
     {
         UpdateAnimClipTimes();
-        gameSession = FindObjectOfType<GameSession>();
         audioPlayer = FindObjectOfType<AudioPlayer>();
     }
 
@@ -168,7 +165,7 @@ public class Player : MonoBehaviour
         float destroyDelay = myAnimator.GetCurrentAnimatorStateInfo(0).length;
 
         
-        gameSession.ProcessPlayerDeath();
+        GameManager.ProcessPlayerDeath();
     }
     #endregion
 
@@ -259,7 +256,7 @@ public class Player : MonoBehaviour
         Invoke("SwallowComplete", swallowTime);
 
         // reset object lifebar
-        gameSession.SetSlimeObjectImage(item.objectIcon);
+        FindObjectOfType<UIManager>().SetSlimeObjectImage(item.objectIcon);
         slimeObjectTimer.ResetTimer();
 
         item.Swallowed();
@@ -452,25 +449,6 @@ public class Player : MonoBehaviour
         if (collision.gameObject.CompareTag(Enum.Tags.Spikes.ToString()))
         {
             Die();
-        }
-
-        if (collision.gameObject.CompareTag(Enum.Tags.Enemy.ToString()))
-        {
-            if (isDashing)
-            {
-                // Particles
-                ParticleSystem instance = Instantiate(EnemyDeathParticleEffect, collision.gameObject.transform.position, Quaternion.identity);
-                Destroy(instance.gameObject, instance.main.duration + instance.main.startLifetime.constantMax);
-
-                Destroy(collision.gameObject);
-            }
-            else
-            {
-                Debug.Log(collision);
-                Debug.Log(isDashing);
-                if(!isObject)
-                    Die();
-            }
         }
 
         else if (collision.gameObject.CompareTag(Enum.Tags.Platform.ToString()))

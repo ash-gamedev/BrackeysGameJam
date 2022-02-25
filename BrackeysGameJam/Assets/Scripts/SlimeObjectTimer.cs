@@ -8,20 +8,20 @@ public class SlimeObjectTimer : MonoBehaviour
     private bool stopTimer;
 
     Player player;
-    GameSession gameSession;
+    UIManager uIManager;
 
     public void ResetTimer()
     {
         stopTimer = false;
-        gameSession.SetSlimeObjectMaxSliderValue(gameTime);
-        gameSession.SetSlimeObjectSliderValue(gameTime);
+        FindObjectOfType<UIManager>().SetSlimeObjectMaxSliderValue(gameTime);
+        uIManager.SetSlimeObjectSliderValue(gameTime);
         currentTime = gameTime;
     }
 
     void Start()
     {
         player = GetComponent<Player>();
-        gameSession = FindObjectOfType<GameSession>();
+        uIManager = FindObjectOfType<UIManager>();
     }
 
     void Update()
@@ -35,12 +35,12 @@ public class SlimeObjectTimer : MonoBehaviour
             {
                 stopTimer = true;
                 player.RemoveSlimeObject();
-                gameSession.ShowSlimeObjectBar(false);
+                uIManager.ShowSlimeObjectBar(false);
             }
 
             if (stopTimer == false)
             {
-                gameSession.SetSlimeObjectSliderValue(currentTime);
+                uIManager.SetSlimeObjectSliderValue(currentTime);
             }
         }
     }

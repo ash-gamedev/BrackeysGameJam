@@ -195,6 +195,10 @@ PrefabInstance:
       propertyPath: flashLightOffTime
       value: 0.9
       objectReference: {fileID: 0}
+    - target: {fileID: 837761739145758009, guid: b051c2c930493c5499b1c5074873e7f9, type: 3}
+      propertyPath: m_BodyType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 837761739145758011, guid: b051c2c930493c5499b1c5074873e7f9, type: 3}
       propertyPath: m_Name
       value: Enemy2 Variant

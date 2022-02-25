@@ -7,12 +7,12 @@ namespace Assets.Scripts
     {
         bool isCoinPickedUp = false;
         AudioPlayer audioPlayer;
-        GameSession gameSession;
+        GameManager gameSession;
 
         private void Start()
         {
             audioPlayer = FindObjectOfType<AudioPlayer>();
-            gameSession = FindObjectOfType<GameSession>();
+            gameSession = FindObjectOfType<GameManager>();
         }
         
         private void OnTriggerEnter2D(Collider2D collision)
@@ -26,7 +26,7 @@ namespace Assets.Scripts
                 Destroy(gameObject);
 
                 // increase coins in game session
-                gameSession.IncreasePlayerGems(1);
+                GameManager.IncreasePlayerGems(1);
 
                 isCoinPickedUp = true;
             }

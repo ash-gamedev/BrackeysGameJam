@@ -131,8 +131,8 @@ PolygonCollider2D:
     m_Paths:
     - - {x: 1.0144277, y: 0.03107268}
       - {x: 1.0113817, y: -0.043253157}
-      - {x: -0.7070821, y: -0.4353075}
-      - {x: -0.8920513, y: -0.15810916}
+      - {x: -0.63337153, y: -0.48701453}
+      - {x: -0.8581842, y: -0.15810916}
       - {x: -0.86218095, y: 0.1621412}
       - {x: -0.62430286, y: 0.49742997}
 --- !u!1 &837761739145758011
@@ -232,13 +232,13 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 837761739145758011}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.002528429, y: -0.19973159}
+  m_Offset: {x: -0.002528429, y: -0.19273806}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -249,7 +249,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.9848285, y: 1.6050274}
+  m_Size: {x: 0.9848285, y: 1.5910404}
   m_EdgeRadius: 0
 --- !u!50 &837761739145758009
 Rigidbody2D:
@@ -285,8 +285,8 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.53480816, y: -1.0660032}
-  m_Size: {x: 0.16165257, y: 1.6721241}
+  m_Offset: {x: -0.57714534, y: -0.7537666}
+  m_Size: {x: 0.07697821, y: 1.0476509}
   m_Direction: 0
 --- !u!114 &837761739145758013
 MonoBehaviour:

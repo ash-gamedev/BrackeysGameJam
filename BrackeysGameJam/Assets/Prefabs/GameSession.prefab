@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6460967205601568}
   - component: {fileID: 6460967205601569}
   - component: {fileID: 6460967205601574}
-  - component: {fileID: 7618986045232790256}
+  - component: {fileID: 3199171485394182091}
   m_Layer: 5
   m_Name: UI Canvas
   m_TagString: Untagged
@@ -103,7 +103,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &7618986045232790256
+--- !u!114 &3199171485394182091
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -112,12 +112,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 6460967205601575}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30601acebbf9d5440a8184667d790354, type: 3}
+  m_Script: {fileID: 11500000, guid: 2c2ba5583936e424abdf918c5eedb6f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   playerGemsText: {fileID: 6460967268838576}
-  playerLives: 1
-  timeBeforeLevelLoad: 1
   timerSlider: {fileID: 2344667872771067393}
   slimeObjectImage: {fileID: 8429818252341079223}
 --- !u!1 &6460967268838582

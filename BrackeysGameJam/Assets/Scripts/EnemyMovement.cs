@@ -65,8 +65,7 @@ namespace Assets.Scripts
         {
             if (collision.CompareTag(Enum.Tags.Platform.ToString()))
             {
-                FlipSprite();
-                ChangeWalkTarget();
+                if(!isIdle) ChangeWalkTarget();
             }
         }
 
