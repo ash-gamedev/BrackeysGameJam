@@ -153,23 +153,26 @@ public class Player : MonoBehaviour
 
     public void Die()
     {
-        isAlive = false;
+        if (isAlive)
+        {
+            isAlive = false;
 
-        // stop movement 
-        myRigidBody.velocity = new Vector2(0, 0);
+            // stop movement 
+            myRigidBody.velocity = new Vector2(0, 0);
 
-        // first make sure player sprite is enabled
-        ChangeIntoPlayer();
+            // first make sure player sprite is enabled
+            ChangeIntoPlayer();
 
-        //play audio 
-        audioPlayer.PlaySoundEffect(Enum.SoundEffects.PlayerDeath);
+            //play audio 
+            audioPlayer.PlaySoundEffect(Enum.SoundEffects.PlayerDeath);
 
-        // play animation
-        ChangeAnimationState(Enum.PlayerAnimation.Dying);
-        float destroyDelay = myAnimator.GetCurrentAnimatorStateInfo(0).length;
+            // play animation
+            ChangeAnimationState(Enum.PlayerAnimation.Dying);
+            float destroyDelay = myAnimator.GetCurrentAnimatorStateInfo(0).length;
 
-        
-        GameManager.ProcessPlayerDeath();
+
+            GameManager.ProcessPlayerDeath();
+        }
     }
     #endregion
 

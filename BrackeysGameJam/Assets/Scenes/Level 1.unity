@@ -3138,19 +3138,23 @@ PrefabInstance:
       objectReference: {fileID: 1123127723224964390}
     - target: {fileID: 5997401208044538938, guid: cc7c58f7c1926e9409689f3619a53f5c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.4531014
+      value: -4.3414354
       objectReference: {fileID: 0}
     - target: {fileID: 5997401208044538938, guid: cc7c58f7c1926e9409689f3619a53f5c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.04291007
+      value: -0.23487008
       objectReference: {fileID: 0}
     - target: {fileID: 5997401208044538939, guid: cc7c58f7c1926e9409689f3619a53f5c, type: 3}
       propertyPath: m_Follow
       value: 
       objectReference: {fileID: 245184745}
     - target: {fileID: 5997401208044538939, guid: cc7c58f7c1926e9409689f3619a53f5c, type: 3}
+      propertyPath: m_Lens.m_SensorSize.x
+      value: 1.7779391
+      objectReference: {fileID: 0}
+    - target: {fileID: 5997401208044538939, guid: cc7c58f7c1926e9409689f3619a53f5c, type: 3}
       propertyPath: m_Lens.OrthographicSize
-      value: 6
+      value: 6.5
       objectReference: {fileID: 0}
     - target: {fileID: 5997401209146289787, guid: cc7c58f7c1926e9409689f3619a53f5c, type: 3}
       propertyPath: m_RootOrder
@@ -3158,11 +3162,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5997401209146289787, guid: cc7c58f7c1926e9409689f3619a53f5c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.3068988
+      value: -2.4185648
       objectReference: {fileID: 0}
     - target: {fileID: 5997401209146289787, guid: cc7c58f7c1926e9409689f3619a53f5c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.25709
+      value: -0.09013
       objectReference: {fileID: 0}
     - target: {fileID: 5997401209146289787, guid: cc7c58f7c1926e9409689f3619a53f5c, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3198,7 +3202,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5997401209146289796, guid: cc7c58f7c1926e9409689f3619a53f5c, type: 3}
       propertyPath: orthographic size
-      value: 6
+      value: 6.5
       objectReference: {fileID: 0}
     - target: {fileID: 5997401209146289799, guid: cc7c58f7c1926e9409689f3619a53f5c, type: 3}
       propertyPath: m_Name
@@ -100134,7 +100138,7 @@ Tilemap:
       - {fileID: -822724188, guid: ae3a2981b39993f4db94fec66ecd23d9, type: 3}
       - {fileID: 441034936, guid: ae3a2981b39993f4db94fec66ecd23d9, type: 3}
       - {fileID: 1004528722, guid: ae3a2981b39993f4db94fec66ecd23d9, type: 3}
-      m_AnimationSpeed: 12.000001
+      m_AnimationSpeed: 12
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   - first: {x: 29, y: -2, z: 0}
@@ -100164,7 +100168,7 @@ Tilemap:
       - {fileID: -822724188, guid: ae3a2981b39993f4db94fec66ecd23d9, type: 3}
       - {fileID: 441034936, guid: ae3a2981b39993f4db94fec66ecd23d9, type: 3}
       - {fileID: 1004528722, guid: ae3a2981b39993f4db94fec66ecd23d9, type: 3}
-      m_AnimationSpeed: 12.000001
+      m_AnimationSpeed: 12
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   - first: {x: 23, y: 15, z: 0}
