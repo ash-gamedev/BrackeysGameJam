@@ -103,7 +103,7 @@ MonoBehaviour:
   flashLightSightDistance: 0
   flashLightOffTime: 0
   flashLightOnTime: 0
-  attackDelay: 0.075
+  attackDelay: 0.09
 --- !u!60 &837761737857610353
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -129,8 +129,8 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 1.0144277, y: 0.03107268}
-      - {x: 1.0113817, y: -0.043253157}
+    - - {x: 1.0120518, y: 0.033061758}
+      - {x: 1.0137575, y: -0.019384168}
       - {x: -0.63337153, y: -0.48701453}
       - {x: -0.8581842, y: -0.15810916}
       - {x: -0.86218095, y: 0.1621412}

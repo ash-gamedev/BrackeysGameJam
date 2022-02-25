@@ -7,13 +7,29 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2649713108508184885, guid: 2f86497e84a3da44786cb867dbe61eb9, type: 3}
+      propertyPath: m_Size.x
+      value: 1.0041867
+      objectReference: {fileID: 0}
+    - target: {fileID: 2649713108508184885, guid: 2f86497e84a3da44786cb867dbe61eb9, type: 3}
+      propertyPath: m_Size.y
+      value: 0.12608482
+      objectReference: {fileID: 0}
+    - target: {fileID: 2649713108508184885, guid: 2f86497e84a3da44786cb867dbe61eb9, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.0018845218
+      objectReference: {fileID: 0}
+    - target: {fileID: 2649713108508184885, guid: 2f86497e84a3da44786cb867dbe61eb9, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.48679805
+      objectReference: {fileID: 0}
     - target: {fileID: 4709893636030616584, guid: 2f86497e84a3da44786cb867dbe61eb9, type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 825564581, guid: 9d365d07fde1b6d4b91d964b3c3d16ab, type: 3}
     - target: {fileID: 4709893636030616585, guid: 2f86497e84a3da44786cb867dbe61eb9, type: 3}
       propertyPath: m_Name
-      value: SlimeItem_Box
+      value: SlimeItem_Box Variant
       objectReference: {fileID: 0}
     - target: {fileID: 4709893636030616591, guid: 2f86497e84a3da44786cb867dbe61eb9, type: 3}
       propertyPath: m_RootOrder

@@ -32,6 +32,8 @@ public class Player : MonoBehaviour
     //items
     [Header("Change/Swallow")]
     [SerializeField] float swallowRange = 1f;
+    [SerializeField] float jumpDelayAsObject = 1f;
+    float lastTimeChanged;
     GameObject swallowedObject;
     GameObject swallowedObjectInstance;
     SpriteRenderer playerSpriteRenderer;
@@ -52,6 +54,7 @@ public class Player : MonoBehaviour
     CapsuleCollider2D myFeetCollider2D;
     Animator myAnimator;
     Enum.PlayerAnimation playerAnimationState;
+    UIManager uiManager;
 
     //public object
     AudioPlayer audioPlayer;
@@ -79,6 +82,7 @@ public class Player : MonoBehaviour
     {
         UpdateAnimClipTimes();
         audioPlayer = FindObjectOfType<AudioPlayer>();
+        uiManager = FindObjectOfType<UIManager>();
     }
 
     void Update()
@@ -235,6 +239,8 @@ public class Player : MonoBehaviour
 
         // update bool
         isObject = false;
+
+        // lastTimeChanged update
     }
 
     void SwallowObject(GameObject itemObject)
@@ -256,7 +262,7 @@ public class Player : MonoBehaviour
         Invoke("SwallowComplete", swallowTime);
 
         // reset object lifebar
-        FindObjectOfType<UIManager>().SetSlimeObjectImage(item.objectIcon);
+        uiManager.SetSlimeObjectImage(item.objectIcon);
         slimeObjectTimer.ResetTimer();
 
         item.Swallowed();
@@ -334,6 +340,8 @@ public class Player : MonoBehaviour
     {
         if (!isAlive) return;
 
+        moveInput = value.Get<Vector2>();
+
         // if player is currently an object
         if (isObject)
         {
@@ -341,27 +349,28 @@ public class Player : MonoBehaviour
             if(value.Get<Vector2>().x != 0f)
                 ChangeIntoPlayer();
         }
-
-        moveInput = value.Get<Vector2>();
     }
 
     void OnJump(InputValue value)
     {
         if (!isAlive) return;
-        if (isObject) ChangeIntoPlayer();
         if (value.isPressed)
-        {
+        {            
             isTouchingGround = myFeetCollider2D.IsTouchingLayers(LayerMask.GetMask(Enum.Tags.Platform.ToString()));
 
-
-            // jump while player is touching ground / or wall sliding
-            if (isTouchingGround || _canWallJump && isWallSliding) 
+            // jump while player is touching ground / or wall sliding (or if object, or recently changed from object)
+            // || (lastTimeChanged - Time.deltaTime) <= jumpDelayAsObject)
+            if (isObject  || isTouchingGround || _canWallJump && isWallSliding) 
             {
+                Debug.Log("lastTimeChanged " + lastTimeChanged + " Time.DeltaTime " + Time.deltaTime);
+
                 float speed = jumpSpeed + (isWallSliding ? wallJumpBoost : 0);
                 myRigidBody.velocity += new Vector2(0f, speed);
 
                 //play audio 
                 audioPlayer.PlaySoundEffect(Enum.SoundEffects.PlayerJump);
+
+                if (isObject) ChangeIntoPlayer();
 
                 _canWallJump = false;
             }
@@ -412,7 +421,7 @@ public class Player : MonoBehaviour
     
     void OnSwallowObject(InputValue value)
     {
-        if (!isAlive || isObject) return;
+        if (!isAlive) return;
         if (value.isPressed)
         {
             var itemsToSwallow = Physics2D.OverlapCircleAll(transform.position, swallowRange);

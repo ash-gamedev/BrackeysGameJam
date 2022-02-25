@@ -152,4 +152,4 @@ MonoBehaviour:
   enemyProjectile: {fileID: 8300000, guid: d11c974962b6f8e449a68e6643724798, type: 3}
   enemyProjectileVolume: 0.5
   gemPickUp: {fileID: 8300000, guid: 1743531cce0b25647a02a9ebf2d8c2d0, type: 3}
-  gemPickUpVolume: 0.25
+  gemPickUpVolume: 0.125
