@@ -32,7 +32,11 @@ namespace Assets.Scripts
 
         void Update()
         {
-            if (flashlight.GetIsKillingPlayer() == true) return;
+            if (flashlight.GetIsKillingPlayer() == true)
+            {
+                ChangeAnimationState(Enum.EnemyAnimation.Idling);
+                return;
+            }
             if(walkDistance > 0)
             {
                 if (!isIdle)

@@ -43,11 +43,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 5cdd06d2dd5eae1479d64d6339ad9580, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 03c118ecb086cae4c8279eaf07d22af4, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.1
+  m_Volume: 0.4
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -141,11 +141,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abab9f15d3ac44748a223ac85ab55b7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerJump: {fileID: 8300000, guid: 1b72f19a9f3083642a728929ecfdf9fd, type: 3}
-  playerJumpVolume: 0.05
-  playerDash: {fileID: 8300000, guid: 6306e88b787cf2246832fa750432403a, type: 3}
+  playerJump: {fileID: 8300000, guid: df1061dc0e787d948a8c81387428c6ae, type: 3}
+  playerJumpVolume: 0.3
+  playerDash: {fileID: 8300000, guid: be53b61f314636b45b3589946f53b37c, type: 3}
   playerDashVolume: 0.4
-  playerDeath: {fileID: 8300000, guid: ae11b0d60a28a7f48980dfeac275d217, type: 3}
-  playerDeathVolume: 0.2
+  playerDeath: {fileID: 8300000, guid: 878476e973a6e8d488f631579127b7c2, type: 3}
+  playerDeathVolume: 0.4
+  playerSwallow: {fileID: 8300000, guid: 6d89aebe35df4474b81a15124dbd0d0a, type: 3}
+  playerSwallowVolume: 0.5
   enemyProjectile: {fileID: 8300000, guid: d11c974962b6f8e449a68e6643724798, type: 3}
   enemyProjectileVolume: 0.5
+  gemPickUp: {fileID: 8300000, guid: 1743531cce0b25647a02a9ebf2d8c2d0, type: 3}
+  gemPickUpVolume: 0.25
