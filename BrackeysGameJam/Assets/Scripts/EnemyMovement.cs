@@ -9,8 +9,9 @@ namespace Assets.Scripts
         [SerializeField] float moveSpeed = 3f;
         [SerializeField] float walkDistance = 1;
         [SerializeField] float idlePauseTime = 1f;
+        [SerializeField] int direction = -1;
         private Vector2 walkTarget;
-        int direction = -1;
+        
 
         Rigidbody2D myRigidBody;
         EnemyFlashlight flashlight;
