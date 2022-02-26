@@ -10,6 +10,8 @@ TagManager:
   - Light
   - KillPlayer
   - Spikes
+  - LevelExit
+  - Gem
   layers:
   - Default
   - TransparentFX

@@ -14,9 +14,7 @@ public class GameManager : MonoBehaviour
     static bool isPlayerAlive = true;
     static float timeBeforeLevelLoad = 1f;
 
-    public static int TotalNumberGems { get; set; }
-    public static int TotalNumberGamesInGame { get; set; }
-    public static int NumberGemsThisLevel { get; set; }
+    public static int CollectedNumberGems { get; set; }
 
     static int lastLevelIndex;
     static int currentLevelIndex;
@@ -27,28 +25,22 @@ public class GameManager : MonoBehaviour
     {
         Instance = this;
     }
-
-    public static int GetPlayerGems()
-    {
-        return TotalNumberGems;
-    }
-    
+        
     public static void IncreasePlayerGems(int amount)
     {
         if (isPlayerAlive == false) return;
-        NumberGemsThisLevel += amount;
+        CollectedNumberGems += amount;
         FindObjectOfType<UIManager>().UpdatePlayerGemsText();
     }
     
     public static void ResetSession()
     {
-        TotalNumberGems = 0;
-        NumberGemsThisLevel = 0;
+        CollectedNumberGems = 0;
     }
 
     static void ResetPlayerGems()
     {
-        NumberGemsThisLevel = 0;
+        CollectedNumberGems = 0;
         FindObjectOfType<UIManager>().UpdatePlayerGemsText();
     }
 
@@ -98,8 +90,7 @@ public class GameManager : MonoBehaviour
 
     public void LoadNextLevel()
     {
-        TotalNumberGems += NumberGemsThisLevel;
-        NumberGemsThisLevel = 0;
+        CollectedNumberGems = 0;
 
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         int nextSceneIndex = currentSceneIndex + 1;

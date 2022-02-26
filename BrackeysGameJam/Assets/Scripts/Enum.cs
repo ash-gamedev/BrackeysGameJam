@@ -9,7 +9,9 @@ public class Enum : MonoBehaviour
         Enemy,
         Item,
         Platform,
-        Spikes
+        Spikes,
+        LevelExit,
+        Gem
     }
 
     public enum PlayerAnimation

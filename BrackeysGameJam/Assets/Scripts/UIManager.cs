@@ -9,16 +9,29 @@ public class UIManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI playerGemsText;
     [SerializeField] Slider timerSlider;
     [SerializeField] Image slimeObjectImage;
+    [SerializeField] GameObject levelCompleteUI;
+    [SerializeField] Slider gemSlider;
+    [SerializeField] TextMeshProUGUI gemFinalCount;
+    [SerializeField] float gemCountDelay = 0.1f;
+
+    bool isLevelComplete = false;
+    int totalGems = 0;
+
+    AudioPlayer audioPlayer;
 
     void Start()
     {
+        gemSlider.value = 0;
+        gemFinalCount.text = "";
         UpdatePlayerGemsText();
         ShowSlimeObjectBar(false);
+        totalGems = GameObject.FindGameObjectsWithTag(Enum.Tags.Gem.ToString()).Length;
+        audioPlayer = FindObjectOfType<AudioPlayer>();
     }
 
     public void UpdatePlayerGemsText()
     {
-        playerGemsText.text = (GameManager.TotalNumberGems + GameManager.NumberGemsThisLevel).ToString() + " x";
+        playerGemsText.text = (GameManager.CollectedNumberGems).ToString() + " x";
     }
 
     public void SetSlimeObjectSliderValue(float value)
@@ -61,4 +74,40 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public void LevelComplete()
+    {
+        if (!isLevelComplete)
+        {
+            isLevelComplete = true;
+            levelCompleteUI.SetActive(true);
+
+            // set gems slider value
+            gemSlider.maxValue = totalGems;
+            StartCoroutine(ShowGemsCollected());
+        }
+    }
+
+    public void IncreaseGemsSliderValue(int sliderValue)
+    {
+        audioPlayer.PlaySoundEffect(Enum.SoundEffects.GemPickUp);
+
+        gemSlider.value = sliderValue;
+        gemFinalCount.text = sliderValue.ToString() + " / " + totalGems.ToString(); 
+    }
+
+    public IEnumerator ShowGemsCollected()
+    {
+        yield return new WaitForSeconds(1f);
+
+        int gemsCollected = GameManager.CollectedNumberGems;
+        int currentGemCount = 0;
+        while (currentGemCount <= gemsCollected)
+        {
+            IncreaseGemsSliderValue(currentGemCount);
+            yield return new WaitForSeconds(gemCountDelay);
+            currentGemCount++;
+        }
+
+        FindObjectOfType<GameManager>().LoadNextLevel();
+    }
 }

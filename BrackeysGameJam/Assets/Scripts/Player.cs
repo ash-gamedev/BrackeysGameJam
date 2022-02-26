@@ -63,6 +63,7 @@ public class Player : MonoBehaviour
     SlimeObjectTimer slimeObjectTimer;
 
     public bool isAlive = true;
+    public bool finishedLevel = false;
 
     // Private variables: to track movement
     bool isFacingRight;
@@ -183,14 +184,14 @@ public class Player : MonoBehaviour
     #region private functions
     void Move()
     {
-        if (isObject || isDashing) return;
+        if (isObject || isDashing || finishedLevel) return;
         Vector2 playerVelocity = new Vector2(moveInput.x * moveSpeed, myRigidBody.velocity.y);
         myRigidBody.velocity = playerVelocity;
     }
 
     void Dash()
     {
-        if (isObject || !isDashing) return;
+        if (isObject || !isDashing || finishedLevel) return;
         if(dashTime <= 0)
         {
             isDashing = false;
@@ -348,7 +349,7 @@ public class Player : MonoBehaviour
     #region input functions
     void OnMove(InputValue value)
     {
-        if (!isAlive) return;
+        if (!isAlive || finishedLevel) return;
 
         moveInput = value.Get<Vector2>();
 
@@ -363,7 +364,7 @@ public class Player : MonoBehaviour
 
     void OnJump(InputValue value)
     {
-        if (!isAlive) return;
+        if (!isAlive || finishedLevel) return;
         if (value.isPressed)
         {            
             isTouchingGround = myFeetCollider2D.IsTouchingLayers(LayerMask.GetMask(Enum.Tags.Platform.ToString()));
@@ -413,7 +414,7 @@ public class Player : MonoBehaviour
 
     void OnChangeIntoObject(InputValue value)
     {
-        if (!isAlive) return;
+        if (!isAlive || finishedLevel) return;
         if (value.isPressed)
         {
             // if not an object, and an object has been swallowed, change into an object
@@ -431,7 +432,7 @@ public class Player : MonoBehaviour
     
     void OnSwallowObject(InputValue value)
     {
-        if (!isAlive) return;
+        if (!isAlive || finishedLevel) return;
         if (value.isPressed)
         {
             var itemsToSwallow = Physics2D.OverlapCircleAll(transform.position, swallowRange);
@@ -459,10 +460,18 @@ public class Player : MonoBehaviour
             }
         }
     }
-    
+
     #endregion
 
     #region Collisions
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag(Enum.Tags.LevelExit.ToString()) && !finishedLevel)
+        {
+            finishedLevel = true;
+        }
+    }
+    
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag(Enum.Tags.Spikes.ToString()))
