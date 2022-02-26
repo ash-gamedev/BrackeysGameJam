@@ -252,6 +252,7 @@ public class Player : MonoBehaviour
 
     void SwallowObject(GameObject itemObject)
     {
+        if (isObject) ChangeIntoPlayer();
         Item item = itemObject.GetComponent<Item>();
 
         if (itemObject != null)
