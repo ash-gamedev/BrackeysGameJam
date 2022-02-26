@@ -142,7 +142,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerJump: {fileID: 8300000, guid: df1061dc0e787d948a8c81387428c6ae, type: 3}
-  playerJumpVolume: 0.3
+  playerJumpVolume: 0.4
   playerDash: {fileID: 8300000, guid: be53b61f314636b45b3589946f53b37c, type: 3}
   playerDashVolume: 0.4
   playerDeath: {fileID: 8300000, guid: 878476e973a6e8d488f631579127b7c2, type: 3}
