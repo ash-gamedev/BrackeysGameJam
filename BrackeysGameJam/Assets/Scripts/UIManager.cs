@@ -18,7 +18,7 @@ public class UIManager : MonoBehaviour
 
     public void UpdatePlayerGemsText()
     {
-        playerGemsText.text = GameManager.NumberGems.ToString() + " x";
+        playerGemsText.text = (GameManager.TotalNumberGems + GameManager.NumberGemsThisLevel).ToString() + " x";
     }
 
     public void SetSlimeObjectSliderValue(float value)

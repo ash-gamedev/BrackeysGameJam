@@ -14,7 +14,12 @@ public class GameManager : MonoBehaviour
     static bool isPlayerAlive = true;
     static float timeBeforeLevelLoad = 1f;
 
-    public static int NumberGems { get; set; }
+    public static int TotalNumberGems { get; set; }
+    public static int TotalNumberGamesInGame { get; set; }
+    public static int NumberGemsThisLevel { get; set; }
+
+    static int lastLevelIndex;
+    static int currentLevelIndex;
 
     public static GameManager Instance;
 
@@ -25,19 +30,25 @@ public class GameManager : MonoBehaviour
 
     public static int GetPlayerGems()
     {
-        return NumberGems;
+        return TotalNumberGems;
     }
     
     public static void IncreasePlayerGems(int amount)
     {
         if (isPlayerAlive == false) return;
-        NumberGems += amount;
+        NumberGemsThisLevel += amount;
         FindObjectOfType<UIManager>().UpdatePlayerGemsText();
     }
     
+    public static void ResetSession()
+    {
+        TotalNumberGems = 0;
+        NumberGemsThisLevel = 0;
+    }
+
     static void ResetPlayerGems()
     {
-        NumberGems = 0;
+        NumberGemsThisLevel = 0;
         FindObjectOfType<UIManager>().UpdatePlayerGemsText();
     }
 
@@ -59,7 +70,7 @@ public class GameManager : MonoBehaviour
         ResetLevel();
     }
 
-    public static void ResetGame()
+    public static void ResetLevelVariables()
     {
         isPlayerAlive = true;
         ResetPlayerGems();
@@ -73,7 +84,7 @@ public class GameManager : MonoBehaviour
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         StartCoroutine(LoadLevel(currentSceneIndex));
 
-        ResetGame();
+        ResetLevelVariables();
     }
 
     private static IEnumerator LoadLevel(int sceneIndex)
@@ -87,6 +98,9 @@ public class GameManager : MonoBehaviour
 
     public void LoadNextLevel()
     {
+        TotalNumberGems += NumberGemsThisLevel;
+        NumberGemsThisLevel = 0;
+
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         int nextSceneIndex = currentSceneIndex + 1;
 

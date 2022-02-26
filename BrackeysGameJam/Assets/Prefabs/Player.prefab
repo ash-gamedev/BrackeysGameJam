@@ -165,8 +165,9 @@ MonoBehaviour:
   isWallSliding: 0
   wallJumpBoost: 1
   swallowRange: 1
-  EnemyDeathParticleEffect: {fileID: 8263209799471678921, guid: 8014c9ba270a7184da47fbee5ce509ae, type: 3}
+  jumpDelayAsObject: 1
   isObject: 0
+  isAlive: 1
 --- !u!95 &1530623498411874063
 Animator:
   serializedVersion: 4
@@ -226,8 +227,8 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.011055272, y: -0.6681665}
-  m_Size: {x: 0.85880053, y: 0.21624199}
+  m_Offset: {x: 0.00079099275, y: -0.67256486}
+  m_Size: {x: 1.1197729, y: 0.22503868}
   m_Direction: 1
 --- !u!114 &1805744813
 MonoBehaviour:
@@ -241,4 +242,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c463ab59078370b42a5270482fecbc12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameTime: 15
+  gameTime: 10
