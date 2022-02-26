@@ -59,6 +59,11 @@ public class GameManager : MonoBehaviour
         ResetLevel();
     }
 
+    public static void ResetGame()
+    {
+        NumberGems = 0;
+    }
+
     void ResetLevel()
     {
         ResetPlayerGems();
