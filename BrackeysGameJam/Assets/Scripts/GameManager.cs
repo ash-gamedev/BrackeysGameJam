@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     static TextMeshProUGUI playerGemsText;
 
     [Header("General")]
-    static int playerLives = 1;
+    static bool isPlayerAlive = true;
     static float timeBeforeLevelLoad = 1f;
 
     public static int NumberGems { get; set; }
@@ -30,10 +30,10 @@ public class GameManager : MonoBehaviour
     
     public static void IncreasePlayerGems(int amount)
     {
+        if (isPlayerAlive == false) return;
         NumberGems += amount;
         FindObjectOfType<UIManager>().UpdatePlayerGemsText();
     }
-
     
     static void ResetPlayerGems()
     {
@@ -55,24 +55,25 @@ public class GameManager : MonoBehaviour
 
     void TakeLife()
     {
-        playerLives--;
+        isPlayerAlive = false;
         ResetLevel();
     }
 
     public static void ResetGame()
     {
-        NumberGems = 0;
+        isPlayerAlive = true;
+        ResetPlayerGems();
+        FindObjectOfType<UIManager>().SetSlimeObjectSliderValue(0);
+        FindObjectOfType<UIManager>().ShowSlimeObjectBar(false);
     }
 
     void ResetLevel()
     {
-        ResetPlayerGems();
-        FindObjectOfType<UIManager>().SetSlimeObjectSliderValue(0);
-        FindObjectOfType<UIManager>().ShowSlimeObjectBar(false);
-
         //reload current scene
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         StartCoroutine(LoadLevel(currentSceneIndex));
+
+        ResetGame();
     }
 
     private static IEnumerator LoadLevel(int sceneIndex)

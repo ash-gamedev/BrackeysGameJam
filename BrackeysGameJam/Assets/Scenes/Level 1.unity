@@ -1888,6 +1888,10 @@ PrefabInstance:
       propertyPath: walkDistance
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 837761739145758013, guid: b051c2c930493c5499b1c5074873e7f9, type: 3}
+      propertyPath: idlePauseTime
+      value: 0.75
+      objectReference: {fileID: 0}
     - target: {fileID: 837761739145758014, guid: b051c2c930493c5499b1c5074873e7f9, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -3138,11 +3142,11 @@ PrefabInstance:
       objectReference: {fileID: 1123127723224964390}
     - target: {fileID: 5997401208044538938, guid: cc7c58f7c1926e9409689f3619a53f5c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.3414354
+      value: -4.3471284
       objectReference: {fileID: 0}
     - target: {fileID: 5997401208044538938, guid: cc7c58f7c1926e9409689f3619a53f5c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.23487008
+      value: -0.23486008
       objectReference: {fileID: 0}
     - target: {fileID: 5997401208044538939, guid: cc7c58f7c1926e9409689f3619a53f5c, type: 3}
       propertyPath: m_Follow
@@ -3162,11 +3166,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5997401209146289787, guid: cc7c58f7c1926e9409689f3619a53f5c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.4185648
+      value: -2.4128723
       objectReference: {fileID: 0}
     - target: {fileID: 5997401209146289787, guid: cc7c58f7c1926e9409689f3619a53f5c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.09013
+      value: -0.09014
       objectReference: {fileID: 0}
     - target: {fileID: 5997401209146289787, guid: cc7c58f7c1926e9409689f3619a53f5c, type: 3}
       propertyPath: m_LocalPosition.z

@@ -39,10 +39,7 @@ public class Player : MonoBehaviour
     SpriteRenderer playerSpriteRenderer;
     bool canChange = false;
     bool isSwallowing = false;
-    float swallowTime;
-
-    [Header("Enemy")]
-    [SerializeField] ParticleSystem EnemyDeathParticleEffect;
+    
 
     [Header("For testing:")]
     [SerializeField] bool isObject = false;
@@ -52,15 +49,20 @@ public class Player : MonoBehaviour
     Rigidbody2D myRigidBody;
     BoxCollider2D myBodyCollider;
     CapsuleCollider2D myFeetCollider2D;
+    
+    UIManager uiManager;
+
+    // animation
     Animator myAnimator;
     Enum.PlayerAnimation playerAnimationState;
-    UIManager uiManager;
+    float swallowAnimationTime;
+    float deathAnimationTime;
 
     //public object
     AudioPlayer audioPlayer;
     SlimeObjectTimer slimeObjectTimer;
 
-    bool isAlive = true;
+    public bool isAlive = true;
 
     // Private variables: to track movement
     bool isFacingRight;
@@ -159,6 +161,10 @@ public class Player : MonoBehaviour
 
             // stop movement 
             myRigidBody.velocity = new Vector2(0, 0);
+            myRigidBody.gravityScale = 1;
+
+            // so the camera stops following player
+            myRigidBody.bodyType = RigidbodyType2D.Kinematic;
 
             // first make sure player sprite is enabled
             ChangeIntoPlayer();
@@ -168,8 +174,6 @@ public class Player : MonoBehaviour
 
             // play animation
             ChangeAnimationState(Enum.PlayerAnimation.Dying);
-            float destroyDelay = myAnimator.GetCurrentAnimatorStateInfo(0).length;
-
 
             GameManager.ProcessPlayerDeath();
         }
@@ -262,7 +266,7 @@ public class Player : MonoBehaviour
 
         // animation
         ChangeAnimationState(Enum.PlayerAnimation.Swallowing);
-        Invoke("SwallowComplete", swallowTime);
+        Invoke("SwallowComplete", swallowAnimationTime);
 
         // reset object lifebar
         uiManager.SetSlimeObjectImage(item.objectIcon);
@@ -334,7 +338,9 @@ public class Player : MonoBehaviour
         foreach (AnimationClip clip in clips)
         {
             if (clip.name.Contains(Enum.PlayerAnimation.Swallowing.ToString()))
-                swallowTime = clip.length;
+                swallowAnimationTime = clip.length;
+            if (clip.name.Contains("Death"))
+                deathAnimationTime = clip.length;
         }
     }
 
