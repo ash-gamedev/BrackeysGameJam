@@ -81,7 +81,7 @@ namespace Assets.Scripts
             {
                 Player player = collision.GetComponent<Player>();
                 bool? isPlayerAnObject = player?.GetIsPlayerAnObject();
-                if(player != null && isPlayerAnObject == false && shootPlayer == false && player.isAlive)
+                if(player != null && isPlayerAnObject == false && shootPlayer == false && player.isAlive && !player.finishedLevel)
                 {
                     shootPlayer = true;
                     ShootPlayer();

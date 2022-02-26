@@ -15,7 +15,10 @@ public class LevelExit : MonoBehaviour
     {
         if (collision.CompareTag(Enum.Tags.Player.ToString()))
         {
-            uiManager.LevelComplete();            
+            uiManager.LevelComplete();
+
+            Player player = collision.GetComponent<Player>();
+            player.finishedLevel = true;
         }
 
     }

@@ -101,10 +101,13 @@ public class UIManager : MonoBehaviour
 
         int gemsCollected = GameManager.CollectedNumberGems;
         int currentGemCount = 0;
+
+        float countDelay = gemsCollected > 30 ? gemCountDelay / 2f : gemCountDelay;
+
         while (currentGemCount <= gemsCollected)
         {
             IncreaseGemsSliderValue(currentGemCount);
-            yield return new WaitForSeconds(gemCountDelay);
+            yield return new WaitForSeconds(countDelay);
             currentGemCount++;
         }
 
