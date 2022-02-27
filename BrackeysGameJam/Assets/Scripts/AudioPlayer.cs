@@ -30,7 +30,7 @@ public class AudioPlayer : MonoBehaviour
     // static persists through all instances of a class
     Player player;
     static AudioPlayer instance;
-    public static AudioSource audioSource;
+    public AudioSource audioSource;
 
     private void Awake()
     {
