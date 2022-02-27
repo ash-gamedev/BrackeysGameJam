@@ -153,3 +153,5 @@ MonoBehaviour:
   enemyProjectileVolume: 0.5
   gemPickUp: {fileID: 8300000, guid: 1743531cce0b25647a02a9ebf2d8c2d0, type: 3}
   gemPickUpVolume: 0.125
+  winSound: {fileID: 8300000, guid: 6e7b20673c886d44d87ed7c2d5803b1d, type: 3}
+  winSoundVolume: 0.5

@@ -969,10 +969,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Music:\n- Dark Reign by Shype \nopengameart.org/users/shype\n\nSound Effects:\n-
-    SideArm Studios\nsidearmstudios.com\n\nFonts:\n- Pixelfy by Stefie Justprince\n-
-    Pixeldust by dustBUST\r\ndafont.com\n\nColour Pallettes:\n- archaon by RAINDRINKER\n-
-    Shadow Slime by slimysubstance\n- Cryptic Ocean by Klafooty\nlospec.com\n\n"
+  m_text: "Music:\n- Dark Reign by Shype \nopengameart.org/users/shype\n- The Tavern
+    by Adam Morton\nAdamMortonMusic.com\n\nSound Effects:\n- SideArm Studios\nsidearmstudios.com\n\nFonts:\n-
+    Pixelfy by Stefie Justprince\n- Pixeldust by dustBUST\r\ndafont.com\n\nColour
+    Pallettes:\n- archaon by RAINDRINKER\n- Shadow Slime by slimysubstance\n- Cryptic
+    Ocean by Klafooty\nlospec.com\n\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 40c27f32e7724444396dd7ede5758a85, type: 2}
   m_sharedMaterial: {fileID: -7988305368022751041, guid: 40c27f32e7724444396dd7ede5758a85, type: 2}
@@ -999,7 +1000,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20
+  m_fontSize: 18.1
   m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 1

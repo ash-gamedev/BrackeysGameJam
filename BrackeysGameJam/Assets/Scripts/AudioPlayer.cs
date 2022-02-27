@@ -21,6 +21,8 @@ public class AudioPlayer : MonoBehaviour
     [Header("Other")]
     [SerializeField] AudioClip gemPickUp;
     [SerializeField] float gemPickUpVolume;
+    [SerializeField] AudioClip winSound;
+    [SerializeField] float winSoundVolume;
 
     // disctionary
     Dictionary<Enum.SoundEffects, (AudioClip, float)> soundEffects;
@@ -28,11 +30,12 @@ public class AudioPlayer : MonoBehaviour
     // static persists through all instances of a class
     Player player;
     static AudioPlayer instance;
+    public static AudioSource audioSource;
 
     private void Awake()
     {
         ManageSingleton();
-
+        audioSource = GetComponent<AudioSource>();
         soundEffects = new Dictionary<Enum.SoundEffects, (AudioClip, float)>
             {
                 { Enum.SoundEffects.PlayerJump, (playerJump, playerJumpVolume) },
@@ -40,7 +43,8 @@ public class AudioPlayer : MonoBehaviour
                 { Enum.SoundEffects.PlayerDeath, (playerDeath, playerDeathVolume) },
                 { Enum.SoundEffects.EnemyProjectile, (enemyProjectile, enemyProjectileVolume) },
                 { Enum.SoundEffects.GemPickUp, (gemPickUp, gemPickUpVolume) },
-                { Enum.SoundEffects.PlayerSwallow, (playerSwallow, playerSwallowVolume) }
+                { Enum.SoundEffects.PlayerSwallow, (playerSwallow, playerSwallowVolume) },
+                { Enum.SoundEffects.Win, (winSound, winSoundVolume) }
             };
     }
 
