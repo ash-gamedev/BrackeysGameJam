@@ -74,16 +74,16 @@ public class GameManager : MonoBehaviour
     {
         //reload current scene
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        StartCoroutine(LoadLevel(currentSceneIndex));
+        StartCoroutine(LoadLevel(currentSceneIndex, timeBeforeLevelLoad));
 
         ResetLevelVariables();
     }
 
-    private static IEnumerator LoadLevel(int sceneIndex)
+    private static IEnumerator LoadLevel(int sceneIndex, float delay)
     {
         FindObjectOfType<UIManager>().ShowSlimeObjectBar(false);
 
-        yield return new WaitForSecondsRealtime(timeBeforeLevelLoad);
+        yield return new WaitForSecondsRealtime(delay);
 
         SceneManager.LoadScene(sceneIndex);
     }
@@ -98,6 +98,6 @@ public class GameManager : MonoBehaviour
         if (nextSceneIndex == SceneManager.sceneCountInBuildSettings)
             nextSceneIndex = 0;
 
-        StartCoroutine(LoadLevel(nextSceneIndex));
+        StartCoroutine(LoadLevel(nextSceneIndex, timeBeforeLevelLoad*2f));
     }
 }

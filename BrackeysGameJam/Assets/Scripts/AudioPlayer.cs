@@ -25,7 +25,7 @@ public class AudioPlayer : MonoBehaviour
     [SerializeField] float winSoundVolume;
 
     // disctionary
-    Dictionary<Enum.SoundEffects, (AudioClip, float)> soundEffects;
+    public Dictionary<Enum.SoundEffects, (AudioClip, float)> soundEffects;
 
     // static persists through all instances of a class
     Player player;

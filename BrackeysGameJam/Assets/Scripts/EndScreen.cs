@@ -12,11 +12,11 @@ namespace Assets.Scripts
         {
             if(endMusicPlayed == false)
             {
-                FadeIntoWinMusic();
+                StartCoroutine(FadeIntoWinMusic());
             }
         }
 
-        void FadeIntoWinMusic()
+        IEnumerator FadeIntoWinMusic()
         {
             AudioPlayer audioPlayer = FindObjectOfType<AudioPlayer>();
 
@@ -25,16 +25,21 @@ namespace Assets.Scripts
                 endMusicPlayed = true;
 
                 float maxVolumne = audioPlayer.audioSource.volume;
-                float volumneAdjustment = 0.01f;
+                float volumneAdjustment = 0.03f;
+                float delayVolumeTime = 0.1f;
 
                 // slowly turn down volume
                 while (audioPlayer.audioSource.volume > 0)
                 {
-                    audioPlayer.audioSource.volume -= volumneAdjustment;
+                    audioPlayer.audioSource.volume -= volumneAdjustment*2;
+                    yield return new WaitForSeconds(delayVolumeTime);
                 }
 
                 // play win sound
-                FindObjectOfType<AudioPlayer>().PlaySoundEffect(Enum.SoundEffects.Win);
+                float lengthOfAudio = (audioPlayer.soundEffects[Enum.SoundEffects.Win].Item1.length) * 0.5f;
+                audioPlayer.PlaySoundEffect(Enum.SoundEffects.Win);
+                Debug.Log(lengthOfAudio);
+                yield return new WaitForSeconds(lengthOfAudio);
 
                 // play new clip
                 audioPlayer.audioSource.clip = endScreenAudioClip;
@@ -44,10 +49,11 @@ namespace Assets.Scripts
                 while (audioPlayer.audioSource.volume < maxVolumne)
                 {
                     audioPlayer.audioSource.volume += volumneAdjustment;
+                    yield return new WaitForSeconds(delayVolumeTime);
                 }
 
             }
-            
+            yield return new WaitForSeconds(0f);
         }
     }
 }
