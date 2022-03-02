@@ -12,6 +12,7 @@ TagManager:
   - Spikes
   - LevelExit
   - Gem
+  - Checkpoint
   layers:
   - Default
   - TransparentFX
@@ -28,7 +29,7 @@ TagManager:
   - Item
   - Gem
   - LevelExit
-  - 
+  - Checkpoint
   - 
   - 
   - 

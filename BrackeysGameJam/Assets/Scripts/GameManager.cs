@@ -7,6 +7,10 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    [Header("Player")]
+    [SerializeField] GameObject player;
+    public Vector3 spawnPoint;
+
     [Header("UI")]
     static TextMeshProUGUI playerGemsText;
 
@@ -23,9 +27,20 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        Instance = this;
+        // only want one game session
+        int numGameSessions = FindObjectsOfType<GameManager>().Length;
+        if (numGameSessions > 1)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            DontDestroyOnLoad(gameObject);
+
+            Instance = this;
+        }
     }
-        
+
     public static void IncreasePlayerGems(int amount)
     {
         if (isPlayerAlive == false) return;
@@ -81,6 +96,7 @@ public class GameManager : MonoBehaviour
 
     private static IEnumerator LoadLevel(int sceneIndex, float delay)
     {
+        Debug.Log(Instance.spawnPoint);
         FindObjectOfType<UIManager>().ShowSlimeObjectBar(false);
 
         yield return new WaitForSecondsRealtime(delay);
@@ -92,6 +108,9 @@ public class GameManager : MonoBehaviour
     {
         CollectedNumberGems = 0;
 
+        //reset spawn point
+        spawnPoint = new Vector3(0, 0, 0);
+
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         int nextSceneIndex = currentSceneIndex + 1;
 
@@ -99,5 +118,15 @@ public class GameManager : MonoBehaviour
             nextSceneIndex = 0;
 
         StartCoroutine(LoadLevel(nextSceneIndex, timeBeforeLevelLoad*2f));
+    }
+
+    public void SpawnPlayer()
+    {
+        Debug.Log("spawned at: " + spawnPoint);
+
+        // instantiate player at spawnpoint
+        Instantiate(player,  // what object to instantiate
+                    spawnPoint, // where to spawn the object
+                    Quaternion.identity); // need to specify rotation
     }
 }

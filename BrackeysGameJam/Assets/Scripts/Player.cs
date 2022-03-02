@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -176,7 +177,15 @@ public class Player : MonoBehaviour
             // play animation
             ChangeAnimationState(Enum.PlayerAnimation.Dying);
 
-            GameManager.ProcessPlayerDeath();
+            try
+            {
+                GameManager.ProcessPlayerDeath();
+            }
+            catch (Exception e)
+            {
+
+            }
+            
         }
     }
     #endregion
