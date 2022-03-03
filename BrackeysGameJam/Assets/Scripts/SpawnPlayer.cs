@@ -4,15 +4,11 @@ using UnityEngine;
 public class SpawnPlayer : MonoBehaviour
 {
 
-    // Use this for initialization
     void Start()
     {
+        if(GameManager.Instance.checkPointReached != true)
+            GameManager.Instance.SetSpawnPoint(transform.position);
         GameManager.Instance.SpawnPlayer();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }

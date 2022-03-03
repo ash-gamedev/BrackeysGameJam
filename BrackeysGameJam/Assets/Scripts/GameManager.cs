@@ -9,7 +9,8 @@ public class GameManager : MonoBehaviour
 {
     [Header("Player")]
     [SerializeField] GameObject player;
-    public Vector3 spawnPoint;
+    private Vector3 spawnPoint;
+    public bool checkPointReached;
 
     [Header("UI")]
     static TextMeshProUGUI playerGemsText;
@@ -71,6 +72,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void SetSpawnPoint(Vector3 newSpawn)
+    {
+        spawnPoint = newSpawn;
+    }
+
     void TakeLife()
     {
         isPlayerAlive = false;
@@ -96,7 +102,6 @@ public class GameManager : MonoBehaviour
 
     private static IEnumerator LoadLevel(int sceneIndex, float delay)
     {
-        Debug.Log(Instance.spawnPoint);
         FindObjectOfType<UIManager>().ShowSlimeObjectBar(false);
 
         yield return new WaitForSecondsRealtime(delay);
@@ -107,9 +112,7 @@ public class GameManager : MonoBehaviour
     public void LoadNextLevel()
     {
         CollectedNumberGems = 0;
-
-        //reset spawn point
-        spawnPoint = new Vector3(0, 0, 0);
+        Instance.checkPointReached = false;
 
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         int nextSceneIndex = currentSceneIndex + 1;

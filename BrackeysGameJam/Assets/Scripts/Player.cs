@@ -290,7 +290,6 @@ public class Player : MonoBehaviour
     
     void SwallowComplete()
     {
-        Debug.Log("Swallow complete");
         isSwallowing = false;
     }
 
@@ -382,7 +381,6 @@ public class Player : MonoBehaviour
             // || (lastTimeChanged - Time.deltaTime) <= jumpDelayAsObject)
             if (isObject  || isTouchingGround || _canWallJump && isWallSliding) 
             {
-                Debug.Log("lastTimeChanged " + lastTimeChanged + " Time.DeltaTime " + Time.deltaTime);
 
                 float speed = jumpSpeed + (isWallSliding ? wallJumpBoost : 0);
                 myRigidBody.velocity += new Vector2(0f, speed);

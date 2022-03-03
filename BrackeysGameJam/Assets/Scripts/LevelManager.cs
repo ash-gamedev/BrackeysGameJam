@@ -16,7 +16,6 @@ public class LevelManager : MonoBehaviour
     public void LoadGame()
     {
         SceneManager.LoadScene("Tutorial");
-        GameManager.Instance.SpawnPlayer();
     }
 
     public void LoadControls()
