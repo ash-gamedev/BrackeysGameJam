@@ -19,6 +19,7 @@ namespace Assets.Scripts
             {
                 checkpointReached = true;
                 GameManager.Instance.SetSpawnPoint(transform.position);
+                GameManager.Instance.SetGemsCollectedBeforeCheckpoint();
                 GameManager.Instance.checkPointReached = true;
 
                 animator.Play("FlagRising");

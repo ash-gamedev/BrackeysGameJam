@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     static bool isPlayerAlive = true;
     static float timeBeforeLevelLoad = 1f;
 
+    public static int CollectedGemsBeforeCheckPoint { get; set; }
     public static int CollectedNumberGems { get; set; }
 
     static int lastLevelIndex;
@@ -58,6 +59,9 @@ public class GameManager : MonoBehaviour
     {
         CollectedNumberGems = 0;
         FindObjectOfType<UIManager>().UpdatePlayerGemsText();
+
+        if (Instance.checkPointReached)
+            CollectedNumberGems = CollectedGemsBeforeCheckPoint;
     }
 
     public static void ProcessPlayerDeath()
@@ -120,6 +124,8 @@ public class GameManager : MonoBehaviour
         if (nextSceneIndex == SceneManager.sceneCountInBuildSettings)
             nextSceneIndex = 0;
 
+        Destroy(FindObjectOfType<ScenePersist>().gameObject);
+
         StartCoroutine(LoadLevel(nextSceneIndex, timeBeforeLevelLoad*2f));
     }
 
@@ -131,5 +137,10 @@ public class GameManager : MonoBehaviour
         Instantiate(player,  // what object to instantiate
                     spawnPoint, // where to spawn the object
                     Quaternion.identity); // need to specify rotation
+    }
+
+    public void SetGemsCollectedBeforeCheckpoint()
+    {
+        CollectedGemsBeforeCheckPoint = CollectedNumberGems;
     }
 }
