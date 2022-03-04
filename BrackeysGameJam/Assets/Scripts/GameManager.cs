@@ -58,10 +58,11 @@ public class GameManager : MonoBehaviour
     static void ResetPlayerGems()
     {
         CollectedNumberGems = 0;
-        FindObjectOfType<UIManager>().UpdatePlayerGemsText();
 
         if (Instance.checkPointReached)
             CollectedNumberGems = CollectedGemsBeforeCheckPoint;
+
+        FindObjectOfType<UIManager>().UpdatePlayerGemsText();
     }
 
     public static void ProcessPlayerDeath()
@@ -102,6 +103,9 @@ public class GameManager : MonoBehaviour
         StartCoroutine(LoadLevel(currentSceneIndex, timeBeforeLevelLoad));
 
         ResetLevelVariables();
+
+        if (!checkPointReached)
+            Destroy(FindObjectOfType<ScenePersist>().gameObject);
     }
 
     private static IEnumerator LoadLevel(int sceneIndex, float delay)

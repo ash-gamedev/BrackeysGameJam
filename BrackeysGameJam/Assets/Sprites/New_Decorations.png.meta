@@ -1358,7 +1358,7 @@ TextureImporter:
       name: Armour
       rect:
         serializedVersion: 2
-        x: 313
+        x: 314
         y: 0
         width: 30
         height: 30
@@ -1470,10 +1470,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
+      New_Decorations_42: -969074781
       New_Decorations_21: -850241340
       New_Decorations_65: 1076317038
       New_Decorations_77: 1031888729
-      New_Decorations_93: -1696731794
       New_Decorations_134: -332262348
       Chest_6: 1820696127
       Armour_1: 293622283
@@ -1606,13 +1606,13 @@ TextureImporter:
       New_Decorations_113: -1980012818
       Armour_4: 220033583
       TableCloth: 681517320
-      New_Decorations_124: 31790017
-      New_Decorations_33: 459571956
-      New_Decorations_31: -1184441479
       New_Decorations_15: -74160725
-      New_Decorations_3: 1068434997
+      New_Decorations_93: -1696731794
+      New_Decorations_31: -1184441479
+      New_Decorations_124: 31790017
       BookShelfFull_12: -1872496454
-      New_Decorations_42: -969074781
+      New_Decorations_33: 459571956
+      New_Decorations_3: 1068434997
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

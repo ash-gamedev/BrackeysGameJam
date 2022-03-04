@@ -16,7 +16,7 @@ public class CameraController : MonoBehaviour
     private void Update()
     {
         if (followingPlayer) return;
-        Player player = FindObjectOfType<Player>();
+        GameObject player = GameObject.FindGameObjectWithTag(Enum.Tags.Player.ToString());
         if(player != null)
         {
             camera.Follow = player.transform;
